@@ -1,0 +1,115 @@
+@import "../../scss/variables/colors";
+@import "../../scss/variables/media-queries";
+@import "../../scss/variables/fonts";
+
+.title-container {
+    display: flex;
+}
+
+.modal {
+    background-color: #fff;
+    box-shadow: 0 0 12px 0 rgba(50, 50, 50, 0.2);
+    display: flex;
+    flex-direction: column;
+    font-family: $font-stack-sans-serif;
+    justify-content: center;
+    max-width: 350px;
+    min-width: 230px;
+    width: 100%;
+}
+
+.title {
+    background: #eff0f0;
+    border-bottom: 1px $legacy-color-gray solid;
+    color: $color-charcoal;
+    margin-bottom: 12px;
+    overflow: hidden;
+    padding: 12px 24px 12px 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.title-bold {
+    font-weight: bold;
+}
+
+.content {
+    padding: 0 12px;
+}
+
+.close-btn {
+    position: absolute;
+    right: 4px;
+    top: 12px;
+}
+
+.close-btn-icon {
+    height: 19px;
+    width: 19px;
+}
+
+.url-container {
+    border-bottom: 1px solid $legacy-color-gray-light;
+    font-size: 14px;
+    padding: 0 12px;
+}
+
+.input {
+    background-color: #ddd;
+    cursor: default;
+    width: 100%;
+}
+
+.share-link {
+    color: $color-silver;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.share-active {
+    color: $color-charcoal;
+    font-weight: bold;
+}
+
+.share-button {
+    align-items: flex-start;
+    background-color: $color-charcoal-dark;
+    border: 0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 12px 0;
+    padding: 10px 16px;
+    text-align: center;
+    text-transform: capitalize;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.share-icon {
+    color: #abafb0;
+    font-size: 36px;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+    width: 100%;
+}
+
+.tab-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.title-inline {
+    display: inline;
+    margin-left: 5px;
+}

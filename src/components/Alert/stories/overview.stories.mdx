@@ -1,0 +1,60 @@
+import { Meta } from '@storybook/addon-docs';
+import Alert from 'Components/Alert/Alert';
+import PropsTable from '../../../../story-helpers/PropsTableHelper.mdx';
+
+<Meta title="Components/Alert/Overview" component={Alert} />
+
+# Alert
+
+The `Alert` component conveys notifications to the user. `Alert` should
+be rendered prior to the notification being conveyed to the user. The
+`active` parameter should be used to trigger the notification.
+
+## Props
+
+export const propsList = [
+    {
+        name: 'active',
+        type: 'bool',
+        description:
+            'Controls when the alert becomes active. Children are only rendered in the component when this is <code>true</code>.',
+    },
+    {
+        name: 'instrusive',
+        type: 'bool',
+        defaultValue: 'false',
+        description: `Controls the <code>role</code> and <code>aria-label</code> attributes.<br/>
+            If <code>instrusive</code> is <b>true</b> then <code>role="alert"</code>
+            indicating that there is information that the user must know about right away.<br/>
+            If it's <b>false</b>, <code>arial-live="polite"</code> which will notify users of updates,
+            but won't interrupt any current task.`,
+    },
+    {
+        name: 'className',
+        type: 'string',
+        defaultValue: 'EMPTY',
+        description: 'Extends the styles applied to the component.',
+    },
+];
+
+<PropsTable propsList={propsList} />
+
+## Use example
+
+```jsx
+import Alert from 'mfe-core/ui/Alert';
+
+const [isNotified, setIsNotified] = useState(false);
+const handleClick = () => setIsNotified(!!isNotified);
+
+return (
+    <>
+        <button onClick={handleClick} type="button">
+            Click me now!!!
+        </button>
+        <Alert intrusive className={styles.alert} active={isNotified}>
+            You clicked the button!
+        </Alert>
+    </>
+);
+```

@@ -1,0 +1,49 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import Anchor from 'Components/Anchor/Anchor';
+import '../../../../scss/fonts/gt-america/gt-america.scss';
+
+# New Tab Anchor
+
+Optionally the `Anchor` can open the URL in a new tab.
+
+<Meta
+    title="Components/Anchor/Features"
+    component={Anchor}
+    argTypes={{
+        children: { table: { disable: true } },
+        className: { table: { disable: true } },
+        href: { table: { disable: true } },
+        label: { table: { disable: true } },
+        onClick: { table: { disable: true } },
+        tabIndex: { table: { disable: true } },
+    }}
+/>
+
+export function Template(args) {
+    /* eslint-disable no-unused-vars */
+    const { href, children, label, newTab, onClick, tabIndex, ref } = args;
+    return (
+        <Anchor
+            href={href}
+            label={label}
+            newTab={newTab}
+            onClick={onClick}
+            tabIndex={tabIndex}
+        >
+            {children}
+        </Anchor>
+    );
+}
+
+<Canvas>
+    <Story
+        name="New Tab"
+        args={{
+            children: 'Click Link!',
+            href: 'https://hbr.org',
+            newTab: true,
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>

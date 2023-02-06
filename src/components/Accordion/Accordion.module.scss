@@ -1,0 +1,39 @@
+@import "../../scss/variables/colors";
+@import "../../scss/variables/fonts";
+
+.container {
+    border-top: 1px solid $legacy-color-gray-light;
+
+    &:last-of-type {
+        border-bottom: 1px solid $legacy-color-gray-light;
+    }
+}
+
+.title {
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    font-family: $font-stack-sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    height: 40px;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 12px 0;
+
+    &::-webkit-details-marker {
+        display: none;
+    }
+}
+
+.title-icon {
+    color: $color-charcoal;
+    font-size: 16px;
+    font-weight: 400;
+    transition: transform 0.15s ease;
+
+    .open & {
+        transform: rotate(90deg);
+    }
+}

@@ -1,0 +1,33 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import SVGIcon from 'Components/SVGIcon/SVGIcon';
+import { Template } from '../playground.stories.mdx';
+
+# Magazine
+
+Displays a _Magazine_ icon.
+
+<Meta
+    title="Components/SVGIcon/Features"
+    component={SVGIcon}
+    argTypes={{
+        className: {
+            table: { disable: true },
+        },
+        label: {
+            table: { disable: true },
+        },
+        variant: {
+            options: Object.values(SVGIcon.variants),
+            control: { type: 'radio' },
+        },
+    }}
+/>
+
+<Story
+    name="Magazine"
+    args={{
+        variant: SVGIcon.variants.MAGAZINE,
+    }}
+>
+    {Template.bind({})}
+</Story>

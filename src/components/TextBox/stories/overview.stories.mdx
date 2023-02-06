@@ -1,0 +1,103 @@
+import { Meta } from '@storybook/addon-docs';
+import TextBox from 'Components/TextBox/TextBox';
+import PropsTable from '../../../../story-helpers/PropsTableHelper.mdx';
+
+<Meta title="Components/TextBox/Overview" component={TextBox} />
+
+# TextBox
+
+## Props
+
+export const propsList = [
+    {
+        name: 'ariaLabel',
+        type: 'string',
+        defaultValue: 'null',
+        description: 'Sets the <code>aria-label</code> HTML property',
+    },
+    {
+        name: 'labelClassName',
+        type: 'string',
+        defaultValue: 'EMPTY',
+        description: 'Label style variation',
+    },
+    {
+        name: 'textBoxClassName',
+        type: 'string',
+        defaultValue: 'EMPTY',
+        description: 'Text area style variation',
+    },
+    {
+        name: 'label',
+        type: 'string',
+        description: 'Text above text area',
+    },
+    {
+        name: 'name',
+        type: 'string',
+        description:
+            'Sets the name for the <code>textarea</code> HTML property.',
+    },
+    {
+        name: 'onChange',
+        type: 'func',
+        defaultValue: 'null',
+        description:
+            'Function handler for modifying <code>textarea</code> field text.',
+    },
+    {
+        name: 'placeholder',
+        type: 'string',
+        defaultValue: 'null',
+        description: 'Text area placeholder text.',
+    },
+    {
+        name: 'required',
+        type: 'bool',
+        defaultValue: 'false',
+        description:
+            'Whether the <code>textarea</code> must be filled out or not.',
+    },
+    {
+        name: 'data-qa',
+        type: 'string',
+        defaultValue: 'null',
+        description: 'Name field to be set during QA testing.',
+    },
+    {
+        name: 'ref',
+        type: 'RefObject',
+        defaultValue: 'null',
+        description: 'The ref to assign to the <code>textarea</code> element.',
+    },
+];
+
+<PropsTable propsList={propsList} />
+
+## Use example
+
+```jsx
+import TextBox from 'mfe-core/ui/TextBox';
+
+const textareaRef = useRef(null);
+const handleChange = (event) => console.log(event.target.value);
+useEffect(() => {
+    if (hasFocus) {
+        textareaRef.current?.focus();
+    }
+}, [textareaRef, hasFocus]);
+return (
+    <TextBox
+        ref={textareaRef}
+        name="description"
+        ariaLabel="Description"
+        label="Description"
+        placeholder="Description"
+        onChange="handleChange"
+        required
+        labelClassName={styles.label}
+        textBoxClassName={styles['text-box']}
+        data-qa="automation-test-selector"
+    />
+);
+```

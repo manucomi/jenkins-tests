@@ -1,0 +1,91 @@
+import { Meta } from '@storybook/addon-docs';
+import Modal from 'Components/Modal/Modal';
+import PropsTable from '../../../../story-helpers/PropsTableHelper.mdx';
+
+<Meta title="Components/Modal/Overview" component={Modal} />
+
+# Modal
+
+The `Modal` component is a React portal that is used to render generic
+modal dialogs. The modal also includes a backdrop that can be styled as well
+as a focus trap to surround the dialog.
+
+# Props
+
+export const propsList = [
+    {
+        name: 'label',
+        type: 'bool',
+        description: 'Controls the <code>aria-label</code> attributes.',
+    },
+    {
+        name: 'onClose',
+        type: 'func',
+        description:
+            'Triggers the event handler when the <code>Modal</code> is closed.',
+    },
+    {
+        name: 'backdropClassName',
+        type: 'string',
+        defaultValue: 'EMPTY',
+        description: 'Extends the styles applied to the backdrop.',
+    },
+    {
+        name: 'modalClassName',
+        type: 'string',
+        defaultValue: 'EMPTY',
+        description: 'Extends the styles applied to the component.',
+    },
+    {
+        name: 'isFocusTrapped',
+        type: 'bool',
+        defaultValue: 'true',
+        description:
+            'Controls if focus should be trapped inside the <code>Modal</code>.',
+    },
+    {
+        name: 'isCentered',
+        type: 'bool',
+        defaultValue: 'false',
+        description: 'Controls the center alignment of the component.',
+    },
+    {
+        name: 'container',
+        type: 'string',
+        defaultValue: 'body',
+        description:
+            'Sets the selector string that the modal attaches itself to.',
+    },
+];
+
+<PropsTable propsList={propsList} />
+
+## Use example
+
+```jsx
+import Modal from 'mfe-core/ui/Modal';
+
+const [isModalOpen, setIsModalOpen] = useState(false);
+return (
+    <div>
+        {isModalOpen && (
+            <Modal
+                onClose={handleClose}
+                label="Welcome dialog"
+                backdropClassName={styles.backdrop}
+                modalClassName={styles.modal}
+                isFocusTrapped={isModalOpen}
+            >
+                <button
+                    type="button"
+                    label="Close this dialog"
+                    onClick={handleClose}
+                >
+                    X
+                </button>
+                <p>Hello World!</p>
+            </Modal>
+        )}
+    </div>
+);
+```

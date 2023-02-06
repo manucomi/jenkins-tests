@@ -1,0 +1,53 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+import AdSlot from 'Components/AdSlot/AdSlot';
+import styles from './stories.module.scss';
+
+# Playground
+
+Play with the controls and see how the component changes.
+
+<Meta title="Components/AdSlot" component={AdSlot} />
+
+export const loadScript = () => {
+    const newtag = document.createElement('script');
+    newtag.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+    newtag.async = true;
+    document.head.appendChild(newtag);
+    window.googletag = newtag;
+};
+
+export function Template(args) {
+    const { className, targets, size, path, onSlotRender } = args;
+    loadScript();
+    return (
+        <AdSlot
+            className={className}
+            targets={targets}
+            size={size}
+            path={path}
+            onSlotRender={onSlotRender}
+        />
+    );
+}
+
+<Story
+    name="Playground"
+    args={{
+        path: '/34363400/TEST_Single-PartnerCenter_230x230',
+        size: [[230, 230]],
+        targets: { position: '11' },
+        onSlotRender: action('adslot loaded'),
+    }}
+    parameters={{
+        custom: {
+            mocks: {
+                AdSlot: {
+                    impl: <div className={styles.square}>Mock Ad 230x230</div>,
+                },
+            },
+        },
+    }}
+>
+    {Template.bind({})}
+</Story>

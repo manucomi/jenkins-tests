@@ -1,0 +1,33 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import SVGIcon from 'Components/SVGIcon/SVGIcon';
+import { Template } from '../playground.stories.mdx';
+
+# Best Of
+
+Displays a _Best Of_ icon.
+
+<Meta
+    title="Components/SVGIcon/Features"
+    component={SVGIcon}
+    argTypes={{
+        className: {
+            table: { disable: true },
+        },
+        label: {
+            table: { disable: true },
+        },
+        variant: {
+            options: Object.values(SVGIcon.variants),
+            control: { type: 'radio' },
+        },
+    }}
+/>
+
+<Story
+    name="Best Of"
+    args={{
+        variant: SVGIcon.variants.BEST_OF,
+    }}
+>
+    {Template.bind({})}
+</Story>

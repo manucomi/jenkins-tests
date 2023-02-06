@@ -1,0 +1,12 @@
+@import "../../scss/variables/colors";
+@import "../../scss/variables/fonts";
+
+.anchor {
+    color: $color-charcoal;
+    font-family: $font-stack-sans-serif;
+    text-decoration: none;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}

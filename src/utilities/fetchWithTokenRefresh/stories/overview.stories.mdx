@@ -1,0 +1,78 @@
+import { Meta } from '@storybook/addon-docs';
+import Table from '../../../../story-helpers/PropsTableHelper.mdx';
+
+<Meta title="Utilities/fetchWithTokenRefresh/Overview" />
+
+# fetchWithTokenRefresh
+
+This utility exports a custom fetcher that automatically refreshes JWT auth tokens. This utility expects that there
+is a global fetch method defined to begin with. In browsers, this shouldn't be an issue, but if you use this utility
+with Node.js then you need to make sure fetch is polyfilled. Some frameworks, like Next.js will pollyfill fetch for you
+on the Node.js side.
+
+## Syntax
+
+```js
+fetchWithTokenRefresh(resource);
+fetchWithTokenRefresh(resource, fetchOptions);
+fetchWithTokenRefresh(resource, fetchOptions, options);
+```
+
+## Parameters
+
+<Table
+    propsList={[
+        {
+            name: 'resource',
+            type: 'string',
+            description:
+                'The path to the requested resource. This is passed through to <code>fetch</code>.',
+        },
+        {
+            name: 'fetchOptions',
+            type: 'object',
+            description:
+                'Options that are passed through to <code>fetch</code>.',
+            defaultValue: '{}',
+        },
+        {
+            name: 'options',
+            type: 'object',
+            description:
+                'Options that are used on the custom fetcher. The baseURL option defaults to the <code>apiOrigin</code> value set with the <code>useConfig</code> hook.',
+            defaultValue: "{ baseURL: '' }",
+        },
+    ]}
+/>
+
+## Request Flow
+
+-   Make a request.
+-   The response status is:
+    -   401
+        -   A new request is triggered to the token refresh API.
+        -   The response status is:
+            -   200
+                -   The original request is made again and the new response is returned regardless of its status.
+            -   Anything else
+                -   The first response is returned.
+    -   Anything else
+        -   The response is returned.
+
+## Use example
+
+Import the module prior to using `fetch`. Preferably, it would be imported once in your page level component or higher up.
+
+```js
+import fetcher from 'mfe-core/utils/fetchWithTokenRefresh';
+
+async function foo(headers) {
+    const response1 = await fetcher('/some/api');
+    const response2 = await fetcher('/some/api', { headers });
+    const response3 = await fetcher(
+        'https://example.com/some/api',
+        {},
+        { baseURL: '' }
+    );
+}
+```

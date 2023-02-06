@@ -1,0 +1,59 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+import TextBox from 'Components/TextBox/TextBox';
+import { Template } from '../playground.stories.mdx';
+import styles from '../stories.module.scss';
+
+<Meta
+    title="Components/TextBox/Features"
+    component={TextBox}
+    argTypes={{
+        ariaLabel: {
+            table: { disable: true },
+        },
+        textBoxClassName: {
+            table: { disable: true },
+        },
+        labelClassName: {
+            table: { disable: true },
+        },
+        'data-qa': {
+            table: { disable: true },
+        },
+        name: {
+            table: { disable: true },
+        },
+        onChange: {
+            table: { disable: true },
+        },
+        required: {
+            table: { disable: true },
+        },
+        disabled: {
+            table: { disable: true },
+        },
+        value: {
+            table: { disable: true },
+        },
+    }}
+/>
+
+# Placeholder and Label
+
+Renders the component with a non-empty string as the placeholder.
+
+<Canvas>
+    <Story
+        name="Placeholder And Label"
+        args={{
+            label: 'Enter some text',
+            placeholder: 'Your text here',
+            name: 'text-input',
+            onChange: action('typed'),
+            labelClassName: styles.label,
+            textBoxClassName: styles.textarea,
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>

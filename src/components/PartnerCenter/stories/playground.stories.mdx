@@ -1,0 +1,65 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import PartnerCenter from 'Components/PartnerCenter/PartnerCenter';
+import styles from './stories.module.scss';
+
+# PartnerCenter
+
+Play with the controls and see how the component changes.
+
+<Meta title="Components/PartnerCenter" component={PartnerCenter} />
+
+export const loadScript = () => {
+    const newtag = document.createElement('script');
+    newtag.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+    newtag.async = true;
+    document.head.appendChild(newtag);
+    window.googletag = newtag;
+};
+
+export const loadConsentData = () => {
+    window.googlefc = {
+        callbackQueue: {
+            push: (item) => {
+                item.CONSENT_DATA_READY();
+            },
+        },
+    };
+    const mockTCData = {
+        gdprApplies: false,
+        eventStatus: 'tcloaded',
+        purpose: {
+            consents: [true],
+        },
+    };
+    // eslint-disable-next-line no-underscore-dangle
+    window.__tcfapi = (eventType, version, callback) => {
+        callback(mockTCData, true);
+    };
+};
+
+export function Template() {
+    loadScript();
+    loadConsentData();
+    return <PartnerCenter />;
+}
+
+<Canvas>
+    <Story
+        name="Playground"
+        parameters={{
+            custom: {
+                mocks: {
+                    AdSlot: {
+                        impl: (
+                            <div className={styles['ad-slot']}>
+                                Mock Ad 230x230
+                            </div>
+                        ),
+                    },
+                },
+            },
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>

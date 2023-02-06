@@ -1,0 +1,49 @@
+import { useState } from 'react';
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import Checkbox from 'Components/Checkbox/Checkbox';
+
+# Playground
+
+Change the controls as you wish, to see how the component behaves.
+
+<Meta title="Components/Checkbox" component={Checkbox} />
+
+export function Template(args) {
+    const {
+        checkboxClassName,
+        isChecked,
+        label,
+        labelClassName,
+        afterLabel,
+        disabled,
+        'data-qa': qaTestSelector,
+    } = args;
+    const [checked, setIsChecked] = useState(isChecked);
+    const handleChange = () => setIsChecked(!checked);
+    return (
+        <div>
+            <Checkbox
+                checkboxClassName={checkboxClassName}
+                isChecked={checked}
+                label={label}
+                labelClassName={labelClassName}
+                onChange={handleChange}
+                afterLabel={afterLabel}
+                disabled={disabled}
+                data-qa={qaTestSelector}
+            />
+        </div>
+    );
+}
+
+<Canvas>
+    <Story
+        name="Playground"
+        args={{
+            label: 'I Agree',
+            isChecked: false,
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>

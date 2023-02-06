@@ -1,0 +1,63 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import Accordion from 'Components/Accordion/Accordion';
+import styles from '../../stories.module.scss';
+
+# Open Accordion
+
+The `Accordion` can also be initialized as open.
+
+<Meta
+    title="Components/Accordion/Features"
+    component={Accordion}
+    argTypes={{
+        title: {
+            table: { disable: true },
+        },
+        className: {
+            table: { disable: true },
+        },
+        children: {
+            table: { disable: true },
+        },
+    }}
+/>
+
+export function Template(args) {
+    const { children, className, title, isInitiallyOpen } = args;
+    return (
+        <div className={styles.container}>
+            <Accordion
+                title={title}
+                isInitiallyOpen={isInitiallyOpen}
+                className={className}
+            >
+                {children}
+            </Accordion>
+        </div>
+    );
+}
+
+export const mockItems = [
+    'Item Number 1',
+    'Item Number 2',
+    'Item Number 3',
+    'Item Number 4',
+    'Item Number 5',
+];
+
+<Canvas>
+    <Story
+        name="isInitiallyOpen"
+        args={{
+            title: 'Accordion',
+            isInitiallyOpen: true,
+            children: mockItems.map((item) => (
+                <div key={item} className={styles['accordion-item']}>
+                    {item}
+                </div>
+            )),
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>

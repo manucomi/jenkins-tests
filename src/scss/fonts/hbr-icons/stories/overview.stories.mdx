@@ -1,0 +1,70 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import FontHelper from '../../../../../story-helpers/FontHelper/FontHelper';
+import '../hbr-icons.scss';
+
+<Meta
+    title="Fonts/HBR-Icons/Overview"
+    argTypes={{
+        fontFamily: {
+            table: { disable: true },
+        },
+        weights: {
+            table: { disable: true },
+        },
+        italic: {
+            table: { disable: true },
+        },
+        size: {
+            control: 'select',
+            options: ['12px', '16px', '20px', '24px', '32px', '40px', '48px'],
+        },
+    }}
+/>
+
+# HBR Icons
+
+HBR custom font.
+
+## Import Font
+
+Import the HBR Icons font styles into one of your SASS modules.
+
+```css
+// _fonts.scss
+
+@import 'mfe-core/typography/hbr-icons.css';
+```
+
+## Use font family
+
+```css
+.element {
+    font-family: 'HBRIcons';
+}
+```
+
+export function Template(args) {
+    const { weights, size, text, fontFamily, italic } = args;
+    return (
+        <FontHelper
+            text={text}
+            size={size}
+            fontFamily={fontFamily}
+            weights={weights}
+            italic={italic}
+        />
+    );
+}
+
+<Story
+    name="Overview"
+    args={{
+        text: 'The quick brown fox jumps over the lazy dog',
+        size: '40px',
+        fontFamily: 'HBRIcons',
+        weights: [200],
+        italic: false,
+    }}
+>
+    {Template.bind({})}
+</Story>

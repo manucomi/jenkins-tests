@@ -1,0 +1,56 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { useState } from 'react';
+import classNames from 'classnames';
+import ShareModal from 'Components/ShareModal/ShareModal';
+import styles from './stories.module.scss';
+
+<Meta title="Components/ShareModal" component={ShareModal} />
+
+# Playground
+
+Change the controls as you wish, to see how the `ShareModal`component behaves.
+
+But in this case, the `ShareModal` mainly receives handler functions as props,
+so you probably won't be able to make major changes by playing with the controls.
+
+export function Template() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const shareOnFacebook = () => {};
+    const shareOnLinkedin = () => {};
+    const shareOnTwitter = () => {
+        return 'https://www.twitter.com/';
+    };
+    const buttonClasses = classNames({
+        [styles.btn]: true,
+        [styles.text]: true,
+    });
+    const article = {
+        title: 'A Demo on Sharing',
+        type: 'Digital Article',
+        url: 'https://hbr.org/article/demo-on-sharing',
+    };
+    return (
+        <div style={{ height: '500px' }}>
+            <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className={buttonClasses}
+            >
+                Click to open Modal
+            </button>
+            {isModalOpen && (
+                <ShareModal
+                    onClose={() => setIsModalOpen(false)}
+                    shareData={article}
+                    shareOnFacebook={shareOnFacebook}
+                    shareOnTwitter={shareOnTwitter}
+                    shareOnLinkedin={shareOnLinkedin}
+                />
+            )}
+        </div>
+    );
+}
+
+<Story name="Playground" args={{}}>
+    {Template.bind({})}
+</Story>

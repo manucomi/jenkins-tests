@@ -1,0 +1,70 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import FontHelper from '../../../../../story-helpers/FontHelper/FontHelper';
+import '../lava-std.scss';
+
+<Meta
+    title="Fonts/Lava-std/Overview"
+    argTypes={{
+        fontFamily: {
+            table: { disable: true },
+        },
+        weights: {
+            table: { disable: true },
+        },
+        italic: {
+            table: { disable: true },
+        },
+        size: {
+            control: 'select',
+            options: ['12px', '16px', '20px', '24px', '32px', '40px', '48px'],
+        },
+    }}
+/>
+
+# Lava Std
+
+Lava was designed for magazine use. It can handle large quantities of text
+with ease. It's legible and harmonious at small sizes, sophisticated and elegant at large sizes.
+
+## Import Font
+
+Import the Lava Std font styles into one of your SASS modules.
+
+```css
+// _fonts.scss
+
+@import 'mfe-core/typography/lava-std.css';
+```
+
+## Use font family
+
+```css
+.element {
+    font-family: 'Lava Std';
+}
+```
+
+export function Template(args) {
+    const { weights, size, text, fontFamily, italic } = args;
+    return (
+        <FontHelper
+            text={text}
+            size={size}
+            fontFamily={fontFamily}
+            weights={weights}
+            italic={italic}
+        />
+    );
+}
+
+<Story
+    name="Overview"
+    args={{
+        text: 'The quick brown fox jumps over the lazy dog',
+        size: '40px',
+        fontFamily: 'Lava Std',
+        weights: [400, 500, 700, 900],
+    }}
+>
+    {Template.bind({})}
+</Story>

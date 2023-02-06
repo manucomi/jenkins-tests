@@ -1,0 +1,45 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import ShareModal from 'Components/ShareModal/ShareModal';
+
+# ShareModal Default
+
+The `ShareModal` component doesn't have any variation in its implementation.
+
+<Meta
+    title="Components/ShareModal/Features"
+    component={ShareModal}
+    argTypes={{
+        onClose: { table: { disable: true } },
+        shareData: { table: { disable: true } },
+        shareOnFacebook: { table: { disable: true } },
+        shareOnLinkedin: { table: { disable: true } },
+        shareOnTwitter: { table: { disable: true } },
+    }}
+/>
+
+export function Template() {
+    const shareOnFacebook = () => {};
+    const shareOnLinkedin = () => {};
+    const shareOnTwitter = () => {
+        return 'https://www.twitter.com/';
+    };
+    const onClose = () => {};
+    const article = {
+        title: 'A Demo on Sharing',
+        type: 'Digital Article',
+        url: 'https://hbr.org/article/demo-on-sharing',
+    };
+    return (
+        <ShareModal
+            onClose={onClose}
+            shareData={article}
+            shareOnFacebook={shareOnFacebook}
+            shareOnTwitter={shareOnTwitter}
+            shareOnLinkedin={shareOnLinkedin}
+        />
+    );
+}
+
+<Story name="Default" args={{}}>
+    {Template.bind({})}
+</Story>

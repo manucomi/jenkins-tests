@@ -1,0 +1,28 @@
+@import "../../variables/fonts";
+
+@font-face {
+    font-display: swap;
+    font-family: "Roboto Slab";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 400;
+    src: url("#{$font-path}/Roboto-Slab-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Roboto Slab";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 200;
+    src: url("#{$font-path}/Roboto-Slab-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Roboto Slab";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+    src: url("#{$font-path}/Roboto-Slab-Bold.ttf") format("truetype");
+}

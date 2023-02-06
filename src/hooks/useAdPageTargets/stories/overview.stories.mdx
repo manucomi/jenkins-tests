@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Hooks/useAdPageTargets/Overview" />
+
+# useAdPageTargets Hook
+
+A React hook that sets key-value pairs at the page level (vs individual slot
+level) to control which ads should show on a particular page.
+
+`Google Publisher Tag (GPT)` is an ad tag library that allows publishers
+to define inventory, initiate and bundle ad requests, and render matching demand.
+The `useAdPageTargets` Hook requires the script to be loaded in order to function correctly.
+
+## Loading GPT script example
+
+Load the GPT library by adding the following to the `<head>` of the HTML document.
+
+```html
+<script src="//www.googletagservices.com/tag/js/gpt.js" async="async" />
+```
+
+## Use example
+
+```js
+import useAdPageTargets from 'mfe-core/hooks/useAdPageTargets';
+
+function App() {
+    const targets = {};
+    const userProfile = useUserStore((state) => state.profile);
+
+    useAdPageTargets(targets, userProfile);
+
+    return <></>;
+}
+```

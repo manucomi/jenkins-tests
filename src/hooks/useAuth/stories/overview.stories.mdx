@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Hooks/useAuth/Overview" />
+
+# useAuth
+
+The useAuth hook is a convenient way to access the current auth state.
+This hook provides the minimal information needed to know if a user is authenticated and `setIsAuthenticated` helper method to manage the current active session.
+
+## Use Examples
+
+```js
+import useAuth from 'mfe-core/hooks/useAuth';
+
+function Component() {
+    const { isAuthenticated } = useAuth();
+
+    if (!isAuthenticated) return <AuthModal />;
+
+    return <UserMenu />;
+}
+```
+
+```js
+import useAuth from 'mfe-core/hooks/useAuth';
+
+function App({ Component, pageProps }) {
+    const { setIsAuthenticated } = useAuth();
+
+    setIsAuthenticated(!!pageProps.userProfile);
+
+    return <Component {...pageProps} />;
+}
+```

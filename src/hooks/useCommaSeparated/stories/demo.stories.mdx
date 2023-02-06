@@ -1,0 +1,31 @@
+<!-- eslint-disable no-unused-vars -->
+
+import { Meta, Story } from '@storybook/addon-docs';
+import { useState } from 'react';
+import { action } from '@storybook/addon-actions';
+import useCommaSeparated from '../useCommaSeparated';
+
+<Meta title="Hooks/useCommaSeparated/Demo" />
+
+# Demo
+
+export function Template(args) {
+    const { arr, finalSeparator } = args;
+    return (
+        <>
+            useCommaSeparated Result
+            <hr />
+            <code>{useCommaSeparated(arr, finalSeparator)}</code>
+        </>
+    );
+}
+
+<Story
+    name="Demo"
+    args={{
+        arr: ['Kathy', 'Shanon'],
+        finalSeparator: 'and',
+    }}
+>
+    {Template.bind({})}
+</Story>

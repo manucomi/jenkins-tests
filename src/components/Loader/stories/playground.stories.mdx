@@ -1,0 +1,19 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import Loader from 'Components/Loader/Loader';
+
+<Meta title="Components/Loader" component={Loader} />
+
+# Playground
+
+Change the controls as you wish, to see how the component behaves.
+
+export function Template(args) {
+    const { className } = args;
+    return <Loader className={className} />;
+}
+
+<Canvas>
+    <Story name="Playground" args={{ className: '' }}>
+        {Template.bind({})}
+    </Story>
+</Canvas>

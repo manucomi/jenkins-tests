@@ -1,0 +1,45 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import useConfigStore from 'Stores/configuration/configuration.store';
+import useConfig from '../useConfig';
+
+<Meta title="Hooks/useConfig/Demo" />
+
+# Demo
+
+export function generateString(length) {
+    const characters = 'abcdefghijklmnopqrstuvwxyz';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i += 1) {
+        result += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+        );
+    }
+    return result;
+}
+
+export function DemoApp() {
+    const config = useConfigStore((state) => state.config);
+    const { setApiOrigin } = useConfig();
+    const updateConfigStore = () => {
+        setApiOrigin(`https://new-api-origin-${generateString(4)}.com`);
+    };
+    return (
+        <div>
+            Initial API origin value:
+            <hr />
+            <pre>
+                <code>{JSON.stringify(config, null, 2)}</code>
+            </pre>
+            <button type="button" onClick={() => updateConfigStore()}>
+                Use useConfig Hook to set a new domain
+            </button>
+        </div>
+    );
+}
+
+export function Template() {
+    return <DemoApp />;
+}
+
+<Story name="Demo">{Template.bind({})}</Story>

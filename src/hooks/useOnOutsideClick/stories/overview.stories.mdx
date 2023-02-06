@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Hooks/useOnOutsideClick/Overview" />
+
+# useOnOutsideClick Hook
+
+A React hook that triggers a handler when the clicked/touched element is not
+the referenced element or a descendant of the referenced element.
+
+## Use Example
+
+```js
+import useOnOutsideClick from 'mfe-core/hooks/useOnOutsideClick';
+
+function Component() {
+    const elementRef = useRef(null);
+    const handler = () => {
+        /*...*/
+    };
+
+    useOnOutsideClick(elementRef, handler);
+
+    return (
+        <div className="container">
+            <div ref={elementRef} />
+            <input />
+        </div>
+    );
+}
+```

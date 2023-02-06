@@ -1,0 +1,93 @@
+@import "../../variables/fonts";
+
+@font-face {
+    font-display: swap;
+    font-family: "Saol Display";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 200;
+    src: url("#{$font-path}/Saol-Display-Medium.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Saol Display";
+    font-stretch: normal;
+    font-style: italic;
+    font-weight: 200;
+    src: url("#{$font-path}/Saol-Display-Medium-Italic.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Saol Display";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 400;
+    src: url("#{$font-path}/Saol-Display-Medium.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Saol Display";
+    font-stretch: normal;
+    font-style: italic;
+    font-weight: 400;
+    src: url("#{$font-path}/Saol-Display-Medium-Italic.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Saol Display";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 500;
+    src: url("#{$font-path}/Saol-Display-Medium.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Saol Display";
+    font-stretch: normal;
+    font-style: italic;
+    font-weight: 500;
+    src: url("#{$font-path}/Saol-Display-Medium-Italic.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Saol Display";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 600;
+    src: url("#{$font-path}/Saol-Display-Semibold.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Saol Display";
+    font-stretch: normal;
+    font-style: italic;
+    font-weight: 600;
+    src: url("#{$font-path}/Saol-Display-Semibold-Italic.otf")
+        format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Saol Display";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+    src: url("#{$font-path}/Saol-Display-Semibold.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Saol Display";
+    font-stretch: normal;
+    font-style: italic;
+    font-weight: 700;
+    src: url("#{$font-path}/Saol-Display-Semibold-Italic.otf")
+        format("opentype");
+}

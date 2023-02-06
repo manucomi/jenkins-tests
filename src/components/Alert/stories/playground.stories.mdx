@@ -1,0 +1,49 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import Alert from 'Components/Alert/Alert';
+import styles from './stories.module.scss';
+
+# Playground
+
+Change the controls as you wish, to see how the component behaves.
+
+<Meta
+    title="Components/Alert"
+    component={Alert}
+    argTypes={{
+        className: {
+            table: { disable: true },
+        },
+        children: {
+            table: { disable: true },
+        },
+    }}
+/>
+
+export function Template(args) {
+    const { children, className, intrusive, active } = args;
+    return (
+        <div style={{ height: '400px' }}>
+            <p>
+                Use the <strong>active</strong> control to show/hide the alert.
+            </p>
+            <br />
+            <Alert className={className} active={active} intrusive={intrusive}>
+                {children}
+            </Alert>
+        </div>
+    );
+}
+
+<Canvas>
+    <Story
+        name="Playground"
+        args={{
+            children: 'Alert Message.',
+            className: styles.text,
+            intrusive: true,
+            active: true,
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>

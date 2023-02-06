@@ -1,0 +1,93 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { useState, useEffect } from 'react';
+import useAdPageTargets from '../useAdPageTargets';
+
+<Meta title="Hooks/useAdPageTargets/Demo" />
+
+# Demo
+
+export const mockProfile = {
+    newsletters: [],
+    jobTitle: 'Analyst',
+    companySize: '1000 to 4999',
+    industry: 'Advertising/Marketing/Public Relations',
+    topics: [
+        {
+            dimension: '4291322418',
+            name: 'Strategy',
+        },
+    ],
+};
+
+export const mockTargets = {
+    layout: ['desktop'],
+    iid: ['73a647bc281441917e8f0879b0bd0fc5'],
+    item: ['Harvard Business Review - Most Popular'],
+    pid: ['200'],
+    oxGroup: ['537064956'],
+};
+
+export const loadScript = () => {
+    const newtag = document.createElement('script');
+    newtag.src = '//www.googletagservices.com/tag/js/gpt.js';
+    newtag.async = true;
+    document.head.appendChild(newtag);
+    // window.googletag = newtag;
+};
+
+<!-- eslint-disable react/prop-types -->
+
+export function DemoApp({ withCustomTargets, withProfile }) {
+    const [userTargets, setUserTargets] = useState({});
+    loadScript();
+    useAdPageTargets(
+        withCustomTargets ? mockTargets : undefined,
+        withProfile ? mockProfile : undefined
+    );
+    useEffect(() => {
+        window.googletag = window.googletag || { cmd: [] };
+        window.googletag.cmd.push(() => {
+            const totalTargets = {};
+            window.googletag
+                .pubads()
+                .getTargetingKeys()
+                .forEach((target) => {
+                    totalTargets[target] = window.googletag
+                        .pubads()
+                        .getTargeting(target);
+                });
+            setUserTargets(totalTargets);
+            window.googletag.pubads().clearTargeting();
+        });
+    }, [withCustomTargets, withProfile]);
+    return (
+        <>
+            Example of user targets from <code>windows.googletag</code> after{' '}
+            <code>useAdPageTargets</code> hook is executed
+            <hr />
+            <pre>
+                <code>{JSON.stringify(userTargets, null, 2)}</code>
+            </pre>
+        </>
+    );
+}
+
+export function Template(args) {
+    const { withCustomTargets, withProfile } = args;
+    return (
+        <DemoApp
+            withCustomTargets={withCustomTargets}
+            withProfile={withProfile}
+        />
+    );
+}
+
+<Story
+    name="Demo"
+    args={{
+        withCustomTargets: false,
+        withProfile: false,
+    }}
+>
+    {Template.bind({})}
+</Story>

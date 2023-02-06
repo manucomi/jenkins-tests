@@ -1,0 +1,17 @@
+.input {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 12px;
+    height: 37px;
+    margin-bottom: 16px;
+    padding: 8px;
+
+    &::placeholder {
+        color: #000;
+        opacity: 0.25;
+    }
+}
+
+.label {
+    cursor: pointer;
+}

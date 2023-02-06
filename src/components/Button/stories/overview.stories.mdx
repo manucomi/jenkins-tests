@@ -1,0 +1,151 @@
+import { Meta } from '@storybook/addon-docs';
+import Button from 'Components/Button/Button';
+import PropsTable from '../../../../story-helpers/PropsTableHelper.mdx';
+import Table from '../../../../story-helpers/TableHelper.mdx';
+
+<Meta title="Components/Button/Overview" component={Button} />
+
+# Button
+
+## Props
+
+export const propsList = [
+    {
+        name: 'className',
+        type: 'string',
+        defaultValue: 'EMPTY',
+        description: 'Extends the styles applied to the component.',
+    },
+    {
+        name: 'disabled',
+        type: 'bool',
+        defaultValue: 'false',
+        description: 'Defines whether the button is clickable or not.',
+    },
+    {
+        name: 'label',
+        type: 'string',
+        defaultValue: 'null',
+        description: 'Text to be rendered above the button container',
+    },
+    {
+        name: 'onClick',
+        type: 'func',
+        defaultValue: 'null',
+        description: 'Function handler for clicking button.',
+    },
+    {
+        name: 'submit',
+        type: 'bool',
+        defaultValue: 'false',
+        description: 'Sets the `type` attribute of the `button` HTML element.',
+    },
+    {
+        name: 'variant',
+        type: 'string',
+        description:
+            'Defines a styling variant for the className. See <a href="#variants" target="_self">Variants</a> section for more information.',
+    },
+    {
+        name: 'id',
+        type: 'string',
+        defaultValue: 'null',
+        description: 'Button ID.',
+    },
+    {
+        name: 'ariaExpanded',
+        type: 'bool',
+        defaultValue: 'null',
+        description: 'Sets the `aria-expanded` HTML property.',
+    },
+    {
+        name: 'data-*',
+        type: 'any',
+        defaultValue: 'null',
+        description:
+            "The component uses a helper function to extract additional props from the component's rest parameter whose name match the format `data-*`. These props are assigned to the internal `button` HTML element.",
+    },
+];
+
+<PropsTable propsList={propsList} />
+
+This component also accepts unspecified props, internally named `restProps`.
+
+<div id="variants" />
+
+## Variants
+
+The variants are added as a property of the `Button` component and are accessible through `Button.variants`.
+
+<Table
+    headings={['Property', 'Description']}
+    body={[
+        [
+            '<code>Button.variants.TEXT</code>',
+            'Used for displaying a normal Button without any background.',
+        ],
+        [
+            '<code>Button.variants.PRIMARY</code>',
+            'Button with a red background.',
+        ],
+        ['<code>Button.variants.ALT</code>', 'Button with a black background'],
+    ]}
+/>
+
+## Use examples
+
+```jsx
+import Button from 'mfe-core/ui/Button';
+
+const buttonRef = useRef(null);
+const handleClick = async () => {
+    setResults(await Service.fetchResults());
+};
+useEffect(() => {
+    if (giveFocus) {
+        buttonRef.current?.focus();
+    }
+}, [buttonRef, giveFocus]);
+return (
+    <Button
+        ref={buttonRef}
+        className={styles.btn}
+        variant={Button.variants.TEXT}
+        onClick={handleClick}
+        id="sign-in-button-header"
+    >
+        Show results
+    </Button>
+);
+```
+
+```jsx
+const isFormValid = () => {
+    return true;
+};
+return (
+    <Button
+        submit
+        variant={Button.variants.PRIMARY}
+        label="Submit the form"
+        disabled={!isFormValid()}
+    >
+        Submit
+    </Button>
+);
+```
+
+```jsx
+const [isNavigationOpen, setIsNavigationOpen] = useState(false);
+const toggleNavigation = () => setIsNavigationOpen(!isNavigationOpen);
+return (
+    <Button
+        variant={Button.variants.Primary}
+        label="Toggle the site navigation"
+        onClick={toggleNavigation}
+        ariaExpanded={isNavigationOpen}
+    />
+        <img src="/images/menu-icon.svg" />
+    </Button>
+);
+```

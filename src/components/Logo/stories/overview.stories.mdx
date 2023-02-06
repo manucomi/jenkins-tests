@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/addon-docs';
+import Logo from 'Components/Logo/Logo';
+import PropsTable from '../../../../story-helpers/PropsTableHelper.mdx';
+import Table from '../../../../story-helpers/TableHelper.mdx';
+
+<Meta title="Components/Logo/Overview" component={Logo} />
+
+# Logo
+
+## Props
+
+export const propsList = [
+    {
+        name: 'variant',
+        type: 'string',
+        description:
+            'The variation of the Logo from a set of three options. See <a href="#variants" target="_self">Variants</a> section for more information.',
+    },
+    {
+        name: 'className',
+        type: 'string',
+        defaultValue: 'EMPTY',
+        description: 'Extends the styles applied to the component',
+    },
+];
+
+<PropsTable propsList={propsList} />
+
+<div id="variants" />
+
+## Variants
+
+The HBR logos are added as a property of the `Logo` component and are accessible through `Logo.variants`,
+
+<Table
+    headings={['Property', 'Description']}
+    body={[
+        [
+            '<code>Logo.variants.HBP_SHIELD</code>',
+            'Harvard Business Publishing logo with shield.',
+        ],
+        [
+            '<code>Logo.variants.HBR_SHIELD</code>',
+            'Harvard Business Review logo with shield.',
+        ],
+        [
+            '<code>Logo.variants.HBR_NO_SHIELD</code>',
+            'Harvard Business Review logo without shield.',
+        ],
+    ]}
+/>
+
+## Use example
+
+```jsx
+import Logo from 'mfe-core/ui/Logo';
+
+return <Logo className={styles.logo} variant={Logo.variants.HBR_SHIELD} />;
+```

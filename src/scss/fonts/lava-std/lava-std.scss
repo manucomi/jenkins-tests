@@ -1,0 +1,73 @@
+@import "../../variables/fonts";
+
+@font-face {
+    font-display: swap;
+    font-family: "Lava Std";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 400;
+    src: url("#{$font-path}/Lava-Std-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Lava Std";
+    font-stretch: normal;
+    font-style: italic;
+    font-weight: 400;
+    src: url("#{$font-path}/Lava-Std-Regular-Italic.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Lava Std";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+    src: url("#{$font-path}/Lava-Std-Bold.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Lava Std";
+    font-stretch: normal;
+    font-style: italic;
+    font-weight: 700;
+    src: url("#{$font-path}/Lava-Std-Bold-Italic.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Lava Std";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 900;
+    src: url("#{$font-path}/Lava-Std-Heavy.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Lava Std";
+    font-stretch: normal;
+    font-style: italic;
+    font-weight: 900;
+    src: url("#{$font-path}/Lava-Std-Heavy-Italic.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Lava Std";
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 500;
+    src: url("#{$font-path}/Lava-Std-Medium.otf") format("opentype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Lava Std";
+    font-stretch: normal;
+    font-style: italic;
+    font-weight: 500;
+    src: url("#{$font-path}/Lava-Std-Medium-Italic.otf") format("opentype");
+}

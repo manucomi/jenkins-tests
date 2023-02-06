@@ -1,0 +1,45 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Getting Started" />
+
+# Getting Started
+
+## Nexus configuration
+
+`mfe-core` is hosted in our private Nexus registry. To install mfe-core you'll
+need to authenticate with Nexus using a token. To generate this token you need
+your Nexus credentials. Your Nexus credentials are different from the ones used
+for Okta. You can verify your credentials by trying to log into the Nexus web
+interface. If you do not have or do not know your Nexus credentials, reach out
+to your manager or a DevOps engineer to help you.
+
+Next, you can generate your authorization token in the terminal:
+
+```bash
+echo -n 'NEXUS_USER_NAME:NEXUS_PASSWORD' | openssl base64
+```
+
+With your newly generated token, go to your `.npmrc` file (**not** this project's)
+located in ` ~/.npmrc` on your machine and update it as follows:
+
+```
+email=YOUR-HARVARD-EMAIL-HERE
+strict-ssl=false
+always-auth=true
+//ae-qa-nexus-app01:8081/content/groups/npm-all/:_auth=YOUR-TOKEN-HERE
+```
+
+## Installation
+
+To add the library to the dependencies:
+
+```bash
+//Latest published version
+npm install mfe-core
+
+//Or choose a version
+npm install mfe-core@X.X.X
+
+//Or get the latest code merged into main branch
+npm install mfe-core@next
+```

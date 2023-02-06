@@ -1,0 +1,33 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import SVGIcon from 'Components/SVGIcon/SVGIcon';
+import { Template } from '../playground.stories.mdx';
+
+# For you
+
+Displays a _For you_ HBR icon.
+
+<Meta
+    title="Components/SVGIcon/Features"
+    component={SVGIcon}
+    argTypes={{
+        className: {
+            table: { disable: true },
+        },
+        label: {
+            table: { disable: true },
+        },
+        variant: {
+            options: Object.values(SVGIcon.variants),
+            control: { type: 'radio' },
+        },
+    }}
+/>
+
+<Story
+    name="For you"
+    args={{
+        variant: SVGIcon.variants.FOR_YOU,
+    }}
+>
+    {Template.bind({})}
+</Story>

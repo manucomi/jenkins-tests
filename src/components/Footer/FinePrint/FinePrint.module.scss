@@ -1,0 +1,90 @@
+@import "../../../scss/variables/media-queries";
+@import "../../../scss/variables/colors";
+
+// FIXME: this color does not meet the WCAG color contrast guidelines
+$text-color: #abafb0;
+
+.container {
+    color: $text-color;
+    font-size: 11px;
+    margin-bottom: 24px;
+    margin-top: 24px;
+
+    @media #{$medium-up} {
+        align-items: flex-start;
+        display: flex;
+        margin-top: 48px;
+    }
+}
+
+.links-container {
+    margin-top: 6px;
+    padding-bottom: 24px;
+}
+
+.link {
+    color: $text-color;
+    font-size: 11px;
+}
+
+.inline-nav-list {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li:not(:last-child) {
+        border-right: 1px solid $text-color;
+        margin-right: 12px;
+        padding-right: 12px;
+    }
+
+    @media #{$medium-up} {
+        display: flex;
+    }
+}
+
+.logo {
+    display: none;
+    margin-right: 20px;
+    margin-top: 6px;
+    width: 95px;
+
+    img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    @media #{$medium-up} {
+        display: block;
+    }
+}
+
+.business-links {
+    display: none;
+    margin-bottom: 2px;
+    margin-top: 8px;
+
+    @media #{$medium-up} {
+        display: flex;
+    }
+}
+
+.business-links-title {
+    display: none;
+    margin: 0;
+    margin-right: 12px;
+
+    @media #{$medium-up} {
+        display: block;
+    }
+}
+
+.copyright {
+    display: none;
+    margin: 0;
+
+    @media #{$medium-up} {
+        display: block;
+    }
+}

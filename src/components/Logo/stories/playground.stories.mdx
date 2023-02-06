@@ -1,0 +1,37 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import Logo from 'Components/Logo/Logo';
+import styles from './stories.module.scss';
+
+# Playground
+
+Change the controls as you wish, to see how the component behaves.
+
+<Meta
+    title="Components/Logo"
+    component={Logo}
+    argTypes={{
+        variant: {
+            options: Object.values(Logo.variants),
+            control: { type: 'radio' },
+        },
+    }}
+/>
+
+export function Template(args) {
+    const { variant, className } = args;
+    return (
+        <div className={styles.logo}>
+            <Logo variant={variant} className={className} />
+        </div>
+    );
+}
+
+<Story
+    name="Playground"
+    args={{
+        variant: Logo.variants.HBP_SHIELD,
+        className: '',
+    }}
+>
+    {Template.bind({})}
+</Story>

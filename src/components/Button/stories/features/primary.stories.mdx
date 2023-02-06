@@ -1,0 +1,54 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+import Button from 'Components/Button/Button';
+import { Template } from '../playground.stories.mdx';
+
+<Meta
+    title="Components/Button/Features"
+    component={Button}
+    argTypes={{
+        id: {
+            table: { disable: true },
+        },
+        className: {
+            table: { disable: true },
+        },
+        children: {
+            table: { disable: true },
+        },
+        submit: {
+            table: { disable: true },
+        },
+        ariaExpanded: {
+            table: { disable: true },
+        },
+        label: {
+            table: { disable: true },
+        },
+        onClick: {
+            table: { disable: true },
+        },
+        variant: {
+            options: Object.values(Button.variants),
+            control: { type: 'radio' },
+        },
+    }}
+/>
+
+# Variant Primary
+
+`Button` component opens when user clicks on it.
+
+<Canvas>
+    <Story
+        name="Variant - Primary"
+        args={{
+            id: 'primaryBtn',
+            children: 'Click me!',
+            variant: Button.variants.PRIMARY,
+            onClick: action('clicked primary'),
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>

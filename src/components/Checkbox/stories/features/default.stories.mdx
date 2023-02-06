@@ -1,0 +1,43 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+import Checkbox from 'Components/Checkbox/Checkbox';
+import { Template } from '../playground.stories.mdx';
+
+<Meta
+    title="Components/Checkbox/Features"
+    component={Checkbox}
+    argTypes={{
+        checkboxClassName: {
+            table: { disable: true },
+        },
+        labelClassName: {
+            table: { disable: true },
+        },
+        afterLabel: {
+            table: { disable: true },
+        },
+        disabled: {
+            table: { disable: true },
+        },
+        'data-qa': {
+            table: { disable: true },
+        },
+    }}
+/>
+
+# Default CheckBox
+
+By default the `Checkbox` component is unchecked and has a label tag.
+
+<Canvas>
+    <Story
+        name="Default"
+        args={{
+            label: 'Check Me!',
+            isChecked: false,
+            onChange: action('clicked link'),
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>

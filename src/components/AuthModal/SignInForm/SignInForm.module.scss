@@ -1,0 +1,44 @@
+@import "../../../scss/placeholders/a11y";
+
+.forgot-password-btn {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22.4px;
+    margin: 0 auto;
+}
+
+.input,
+.btn {
+    width: 100%;
+}
+
+.label {
+    height: 1px;
+    left: -10000px;
+    overflow: hidden;
+    position: absolute;
+    top: auto;
+    width: 1px;
+}
+
+.btn {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.notice {
+    color: #fca51f;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22.4px;
+    margin: 0;
+}
+
+.loader {
+    margin: 0 auto;
+}
+
+.captcha {
+    margin-bottom: 16px;
+}

@@ -1,0 +1,67 @@
+.loader {
+    background: transparent;
+    height: 24px;
+    position: relative;
+    width: 24px;
+}
+
+.rotation {
+    animation: rota 3s linear infinite;
+    background: transparent;
+    border: 2px solid #239caa;
+    border-radius: 100% 0 0 100% / 50% 0 0 50%;
+    border-right: 0;
+    height: 100%;
+    position: absolute;
+    transform-origin: 100% 50%;
+    width: 50%;
+    z-index: 1001;
+}
+
+.filler {
+    animation: opa 3s steps(1, end) infinite reverse;
+    border-left: 0;
+    border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+    left: 50%;
+    opacity: 0;
+    z-index: 1000;
+}
+
+.mask {
+    animation: opa 3s steps(1, end) infinite;
+    background: inherit;
+    height: 100%;
+    opacity: 1;
+    position: absolute;
+    width: 50%;
+    z-index: 1002;
+}
+
+.loader:hover {
+    .rotation,
+    .filler,
+    .mask {
+        animation-play-state: running;
+    }
+}
+
+@keyframes rota {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes opa {
+    0% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0;
+    }
+}

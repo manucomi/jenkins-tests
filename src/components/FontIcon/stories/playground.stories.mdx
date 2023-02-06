@@ -1,0 +1,32 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import FontIcon from 'Components/FontIcon/FontIcon';
+import '../../../scss/fonts/hbr-icons/hbr-icons.scss';
+
+# Playground
+
+Change the controls as you wish, to see how the component behaves.
+
+<Meta
+    title="Components/FontIcon"
+    component={FontIcon}
+    argTypes={{
+        variant: {
+            options: Object.values(FontIcon.variants),
+            control: { type: 'radio' },
+        },
+    }}
+/>
+
+export function Template(args) {
+    const { className, label, variant } = args;
+    return <FontIcon label={label} variant={variant} className={className} />;
+}
+
+<Story
+    name="Playground"
+    args={{
+        variant: FontIcon.variants.BOOKMARK,
+    }}
+>
+    {Template.bind({})}
+</Story>

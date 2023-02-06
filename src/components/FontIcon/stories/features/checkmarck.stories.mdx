@@ -1,0 +1,30 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import FontIcon from 'Components/FontIcon/FontIcon';
+import { Template } from '../playground.stories.mdx';
+import '../../../../scss/fonts/hbr-icons/hbr-icons.scss';
+
+# Checkmark
+
+Displays a _Checkmark_ Icon.
+
+<Meta
+    title="Components/FontIcon/Features"
+    component={FontIcon}
+    argTypes={{
+        className: {
+            table: { disable: true },
+        },
+        label: {
+            table: { disable: true },
+        },
+    }}
+/>
+
+<Story
+    name="Checkmark"
+    args={{
+        variant: FontIcon.variants.CHECKMARK,
+    }}
+>
+    {Template.bind({})}
+</Story>

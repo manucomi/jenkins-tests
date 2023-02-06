@@ -1,0 +1,31 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import SVGIcon from 'Components/SVGIcon/SVGIcon';
+
+# Playground
+
+Select an SVGIcon variant using the switch and see what it renders.
+
+<Meta
+    title="Components/SVGIcon"
+    component={SVGIcon}
+    argTypes={{
+        variant: {
+            options: Object.values(SVGIcon.variants),
+            control: { type: 'radio' },
+        },
+    }}
+/>
+
+export function Template(args) {
+    const { className, variant } = args;
+    return <SVGIcon className={className} variant={variant} />;
+}
+
+<Story
+    name="Playground"
+    args={{
+        variant: SVGIcon.variants.X,
+    }}
+>
+    {Template.bind({})}
+</Story>

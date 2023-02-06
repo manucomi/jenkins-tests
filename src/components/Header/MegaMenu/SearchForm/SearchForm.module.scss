@@ -1,0 +1,115 @@
+@import "../../../../scss/variables/colors";
+@import "../../../../scss/variables/fonts";
+@import "../../../../scss/variables/media-queries";
+@import "../../../../scss/placeholders/a11y";
+
+.search-form {
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid $legacy-color-gray-lighter;
+    border-top: 1px solid $legacy-color-gray-lighter;
+    display: flex;
+    flex-shrink: 0;
+    height: 62px;
+    margin-top: 26px;
+    position: relative;
+    z-index: 2;
+
+    @media #{$medium-up} {
+        border-bottom: 1px solid #a4a4a4;
+        border-top-style: none;
+        height: auto;
+        margin-top: 46px;
+        padding: 0 0 12px;
+    }
+}
+
+.search-field {
+    color: $color-charcoal;
+    font-size: 22px;
+    height: auto;
+    margin-bottom: 0;
+    padding-bottom: 0 !important;
+    padding-left: 22px;
+    padding-right: 48px;
+    padding-top: 5px !important;
+    width: calc(100% - 60px);
+
+    @media #{$medium-up} {
+        font-size: 35px;
+        margin-top: 5px;
+        padding: 0;
+    }
+
+    &::placeholder {
+        color: #747474;
+        font-size: 16px;
+        letter-spacing: -0.17px;
+        opacity: 1;
+
+        @media #{$medium-up} {
+            color: #a4a4a4;
+            font-size: 34px;
+        }
+    }
+}
+
+.search-field-label {
+    height: 1px;
+    left: -10000px;
+    overflow: hidden;
+    position: absolute;
+    top: auto;
+    width: 1px;
+}
+
+.search-field-with-auto-suggest {
+    color: $color-charcoal;
+    display: none;
+    font-size: 35px;
+    margin-top: 5px;
+
+    @media #{$medium-up} {
+        display: block;
+    }
+}
+
+.search-field,
+.search-field-with-auto-suggest {
+    border-style: none;
+    flex: 1 0;
+    font-family: $font-stack-sans-serif;
+    font-weight: 600;
+
+    &::-ms-clear {
+        display: none;
+    }
+
+    &::-webkit-search-cancel-button {
+        appearance: none;
+    }
+}
+
+.btn-search {
+    align-items: center;
+    border-left: 1px solid $legacy-color-gray-lighter;
+    display: flex;
+    height: 43px;
+    justify-content: center;
+    width: 60px;
+
+    @media #{$medium-up} {
+        border-color: #a4a4a4;
+    }
+}
+
+.btn-clear-search {
+    color: #a4a4a4;
+    font-size: 12px;
+    text-align: center;
+    width: 48px;
+
+    &.hide {
+        visibility: hidden;
+    }
+}

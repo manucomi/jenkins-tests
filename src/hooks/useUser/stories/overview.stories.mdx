@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Hooks/useUser/Overview" />
+
+# useUser
+
+The useUser hook returns the current user state: `{ profile }`.
+You can use the `profile` object to access the currently active User and display information about the user's profile.
+Helper methods `{ setProfile, deleteProfile }` can be used to update or delete the profile.
+
+## Use Example
+
+```js
+import useUser from 'mfe-core/hooks/useUser';
+
+function App() {
+    const { profile, setProfile } = useUser();
+
+    const handleSignIn = (user) => {
+        setProfile(user);
+    };
+
+    if (!profile) return <SignIn onSignIn={handleSignIn} />;
+
+    return <div>Hello, {profile.firstName}!</div>;
+}
+```

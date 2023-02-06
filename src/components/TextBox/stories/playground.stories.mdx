@@ -1,0 +1,56 @@
+import { useRef, useEffect, hasFocus } from 'react';
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import TextBox from 'Components/TextBox/TextBox';
+import styles from './stories.module.scss';
+
+<Meta title="Components/TextBox" component={TextBox} />
+
+# Playground
+
+export function Template(args) {
+    const {
+        ariaLabel,
+        textBoxClassName,
+        labelClassName,
+        label,
+        name,
+        onChange,
+        placeholder,
+        required,
+        'data-qa': qaTestSelector,
+    } = args;
+    const textFieldRef = useRef(null);
+    useEffect(() => {
+        if (hasFocus) {
+            textFieldRef.current?.focus();
+        }
+    }, [textFieldRef]);
+    return (
+        <TextBox
+            ariaLabel={ariaLabel}
+            textBoxClassName={textBoxClassName}
+            labelClassName={labelClassName}
+            ref={textFieldRef}
+            name={name}
+            label={label}
+            placeholder={placeholder}
+            onChange={onChange}
+            required={required}
+            data-qa={qaTestSelector}
+        />
+    );
+}
+
+<Canvas>
+    <Story
+        name="Playground"
+        args={{
+            label: 'Label',
+            name: 'textInputPlayground',
+            labelClassName: styles.label,
+            textBoxClassName: styles.textarea,
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>

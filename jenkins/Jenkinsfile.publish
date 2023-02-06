@@ -1,0 +1,137 @@
+pipeline {
+    agent any
+
+    tools { nodejs "node-v16.13.1" }
+
+    options {
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: "5"))
+    }
+
+    environment {
+        NEXUS_CREDS = credentials("jenkins-nexus")
+        GH_HOST = "git.harvardbusiness.org"
+        MAIN_BRANCH = "main"
+    }
+
+    stages {
+        stage("Choose Release Type") {
+            steps {
+                script {
+                    timeout(2) {
+                        env.releaseType = input message: "Please select a release type",
+                            parameters: [choice(choices: ["patch", "minor", "major"],
+                                description: "The release type corresponds to semantic versioning. For more details, visit https://semver.org",
+                                name: "releaseType")]
+                    }
+                    echo "Release type: ${env.releaseType}"
+                }
+            }
+        }
+
+        stage("Checkout from Version Control") {
+            steps {
+                withCredentials([gitUsernamePassword(credentialsId: 'git-hbrjenkins-itops-username')]) {
+                    sh "git fetch"
+                    sh "git checkout ${env.MAIN_BRANCH}"
+                        
+                    sh "git reset --hard HEAD"
+                }
+            }
+        }
+
+        stage("Install Dependencies") {
+            steps {
+                sh "node -v"
+                sh "npm ci"
+            }
+        }
+
+        stage("Bump Package Version Without Tagging") {
+            steps {
+                withCredentials([gitUsernamePassword(credentialsId: 'git-hbrjenkins-itops-username')]) {
+                    script {
+                        newVersion = sh(script: "npm version ${env.releaseType} --no-git-tag-version | sed s/v//", returnStdout: true)
+                        newVersion = newVersion.trim()
+                        versionMessage = "bump version to ${newVersion}"
+                    }
+                }
+            }
+        }
+
+        stage("Deploy") {
+            steps {
+                script {
+                    sh "echo '//nexus.hbsp.harvard.edu/content/repositories/npm-internal/:_auth=\${NPM_TOKEN}' >> .npmrc"
+                    withEnv(["NPM_TOKEN=${generateNPMToken()}"]) {
+                        sh "npm run release"
+                        sh "git checkout -- .npmrc"
+                    }
+                }
+                withCredentials([gitUsernamePassword(credentialsId: 'git-hbrjenkins-itops-username')]) {
+                    script {
+                        sh "git checkout -b release-${newVersion}"
+                        sh "git commit -am '${versionMessage}'"
+                        sh "git push --no-verify --set-upstream origin release-${newVersion}"
+                    }
+                }
+                withCredentials([string(credentialsId: "git-hbrjenkins-itops", variable: "GH_ENTERPRISE_TOKEN")]) {
+                    script {
+                        prURL = sh(script: "gh pr create --title 'Release ${newVersion}' --base ${env.MAIN_BRANCH} --head release-${newVersion} --body 'This pull request was automatically generated, by Jenkins, for release ${newVersion}'", returnStdout: true)
+                        sh "gh pr merge ${prURL.trim()} --rebase --admin"
+                    }
+                }
+                withCredentials([gitUsernamePassword(credentialsId: 'git-hbrjenkins-itops-username')]) {
+                    script {
+                        sh "git checkout ${env.MAIN_BRANCH}"
+                        sh "git pull"
+                        sh "git tag -a v${newVersion} -m '${versionMessage}'"
+                        sh "git push --tags --no-verify"
+                    }
+                    withCredentials([string(credentialsId: "git-hbrjenkins-itops", variable: "GITHUB_TOKEN")]) {
+                        sh "npm run release:notes"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            notifySlack(currentBuild.result)
+            cleanWs(notFailBuild: true)
+        }
+    }
+}
+
+def notifySlack(String buildStatus = "STARTING") {
+    buildStatus = buildStatus ?: "SUCCESS"
+
+    def color
+    groovy.lang.GString msg = "${env.JOB_NAME} - #${env.BUILD_NUMBER}, Build Status: ${buildStatus} "
+    def seconds = currentBuild.duration / 1000
+
+    if (buildStatus == "STARTING" || buildStatus == "NOT_BUILT") {
+        color = "#D4DADF"
+    } else if (buildStatus == "SUCCESS") {
+        color = "#BDFFC3"
+    } else if (buildStatus == "UNSTABLE") {
+        color = "#FFFE89"
+    } else {
+        color = "#FF9FA1"
+    }
+
+    if (buildStatus != "STARTING") {
+        msg += " after ${seconds} seconds (<${env.BUILD_URL}|Open>)\n" +
+            "(<${env.BUILD_URL}/Build_Reports/|Build Reports>)"
+    }
+
+    slackSend(color: color, message: msg)
+}
+
+def generateNPMToken() {
+    withCredentials([usernamePassword(credentialsId: "jenkins-nexus", passwordVariable: 'password', usernameVariable: 'user')]) {
+        def token = sh(returnStdout: true, script: "echo -n $user:$password | openssl base64")
+        return token
+    }
+}

@@ -1,0 +1,58 @@
+@import "../../scss/variables/colors";
+@import "../../scss/variables/fonts";
+
+.btn {
+    font-family: $font-stack-sans-serif;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.alternate,
+.primary {
+    border-radius: 3px;
+    border-style: none;
+    color: #fff;
+    padding: 11px 16px 10px;
+    transition: background-color 0.3s ease-out;
+}
+
+.alternate {
+    background-color: $color-charcoal-dark;
+
+    &:hover {
+        opacity: 0.6;
+    }
+
+    &:disabled {
+        background-color: $legacy-color-gray;
+        opacity: 0.6;
+    }
+}
+
+.primary {
+    background-color: $color-hbr-red;
+
+    &:hover {
+        background-color: $legacy-color-maroon;
+    }
+
+    &:disabled {
+        background-color: $legacy-color-gray;
+    }
+}
+
+.text {
+    background-color: transparent;
+    border-style: none;
+    color: $color-charcoal;
+    font-size: inherit;
+    letter-spacing: inherit;
+    padding: 0;
+    text-align: left;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}

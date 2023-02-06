@@ -1,0 +1,79 @@
+@import "../../scss/variables/colors";
+@import "../../scss/variables/media-queries";
+@import "../../scss/variables/fonts";
+@import "../../scss/variables/colors";
+
+$modal-padding-md: 50px;
+$modal-padding-sm: 10px;
+
+$ad-width-md: 640px;
+$ad-height-md: 480px;
+$ad-width-sm: 300px;
+$ad-height-sm: 250px;
+
+.is-hidden {
+    display: none;
+}
+
+.modal {
+    background-color: #fff;
+    border: 0;
+    box-shadow: 0 0 13px 2px #d5dcdf;
+    box-sizing: border-box;
+    margin: 0 auto;
+    opacity: 1;
+    padding: 0 $modal-padding-sm $modal-padding-sm;
+    position: relative;
+    top: calc(50% - (#{$ad-height-sm} + (#{$modal-padding-sm} * 2)) / 2);
+    width: $ad-width-sm + $modal-padding-sm * 2;
+    z-index: 1000;
+
+    @media #{$medium-up} {
+        padding: 0 $modal-padding-md $modal-padding-md;
+        top: calc(50% - (#{$ad-height-md} + (#{$modal-padding-md} * 2)) / 2);
+        width: $ad-width-md + $modal-padding-md * 2;
+    }
+}
+
+.closing {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+.ad-container {
+    overflow: hidden;
+    text-align: center;
+}
+
+.ad-notice {
+    color: $color-charcoal;
+    font-family: $font-stack-sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 22.4px;
+    margin: 0;
+    padding-top: 6px;
+    text-align: center;
+    text-transform: uppercase;
+
+    @media #{$medium-up} {
+        line-height: $modal-padding-md;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    right: 7px;
+    top: 7px;
+
+    @media #{$medium-up} {
+        right: 22px;
+        top: 22px;
+    }
+}
+
+.close-btn-icon {
+    height: 19px;
+    width: 19px;
+}

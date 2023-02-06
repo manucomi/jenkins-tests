@@ -1,0 +1,140 @@
+import { Meta } from '@storybook/addon-docs';
+import TextInput from 'Components/TextInput/TextInput';
+import PropsTable from '../../../../story-helpers/PropsTableHelper.mdx';
+import Table from '../../../../story-helpers/TableHelper.mdx';
+
+<Meta title="Components/TextInput/Overview" component={TextInput} />
+
+# TextInput
+
+## Props
+
+export const propsList = [
+    {
+        name: 'ariaLabel',
+        type: 'string',
+        defaultValue: 'null',
+        description: 'Sets the <code>aria-label</code> input HTML property.',
+    },
+    {
+        name: 'textInputClassName',
+        type: 'string',
+        defaultValue: 'EMPTY',
+        description: 'HTML <code>input</code> element style variation.',
+    },
+    {
+        name: 'labelClassName',
+        type: 'string',
+        defaultValue: 'EMPTY',
+        description: 'Label style variation.',
+    },
+    {
+        name: 'label',
+        type: 'string',
+        description: 'Label to show above input.',
+    },
+    {
+        name: 'name',
+        type: 'string',
+        description: 'Sets <code>name</code> input HTML property.',
+    },
+    {
+        name: 'onChange',
+        type: 'func',
+        defaultValue: 'null',
+        description: 'Function handler for modifying input field text.',
+    },
+    {
+        name: 'placeholder',
+        type: 'string',
+        defaultValue: 'null',
+        description: 'Text area placeholder text.',
+    },
+    {
+        name: 'required',
+        type: 'bool',
+        defaultValue: 'false',
+        description: 'Whether the input must be filled out or not.',
+    },
+    {
+        name: 'variant',
+        type: 'string',
+        description:
+            'The type of the input field. See <a href="#variants" target="_self">Variants</a> section for more information.',
+    },
+    {
+        name: 'disabled',
+        type: 'bool',
+        defaultValue: 'false',
+        description: 'Whether the text input should be disabled or not.',
+    },
+    {
+        name: 'value',
+        type: 'string',
+        defaultValue: 'undefined',
+        description: 'Sets <code>value</code> input HTML element.',
+    },
+    {
+        name: 'data-qa',
+        type: 'string',
+        defaultValue: 'null',
+        description: 'Name field to be set during QA testing.',
+    },
+    {
+        name: 'ref',
+        type: 'RefObject',
+        defaultValue: 'null',
+        description: 'The ref to assign to the `input` element.',
+    },
+];
+
+<PropsTable propsList={propsList} />
+
+<div id="variants" />
+
+## Variants
+
+The TextInput types are added as a property of the `TextInput` component and are accessible through `TextInput.variants`.
+
+<Table
+    headings={['Property', 'Description']}
+    body={[
+        ['<code>TextInput.variants.TEXT</code>', 'Regular text input field.'],
+        [
+            '<code>TextInput.variants.EMAIL</code>',
+            'Input field that contains an e-mail address.',
+        ],
+        ['<code>TextInput.variants.PASSWORD</code>', 'Password field.'],
+        ['<code>TextInput.variants.SEARCH</code>', 'Search field.'],
+    ]}
+/>
+
+## Use example
+
+```jsx
+import TextInput from 'mfe-core/ui/TextInput';
+
+const textFieldRef = useRef(null);
+const handleChange = (event) => console.log(event.target.value);
+useEffect(() => {
+    if (hasFocus) {
+        textFieldRef.current?.focus();
+    }
+}, [textFieldRef, hasFocus]);
+return (
+    <TextInput
+        ariaLabel="Enter your email address"
+        textInputClassName={styles.input}
+        labelClassName={styles.label}
+        variant={TextInput.variants.EMAIL}
+        ref={textFieldRef}
+        name="email"
+        label="Email address"
+        placeholder="Email"
+        onChange="handleChange"
+        disabled={false}
+        required
+        value={shareData.url}
+    />
+);
+```

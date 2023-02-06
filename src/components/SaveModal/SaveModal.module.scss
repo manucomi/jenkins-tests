@@ -1,0 +1,157 @@
+@use "sass:math";
+@import "../../scss/variables/colors";
+@import "../../scss/variables/fonts";
+
+$modal-spacing: 24px;
+$modal-padding: math.div($modal-spacing, 2);
+$label-color: #4d4c4c;
+
+.close-icon {
+    color: #393d41;
+    height: 22px;
+    margin-bottom: -3px;
+    margin-top: -3px;
+    width: 22px;
+}
+
+.modal {
+    background-color: #fff;
+    box-shadow: 0 0 12px 0 rgba(50, 50, 50, 0.2);
+    display: flex;
+    flex-direction: column;
+    font-family: $font-stack-sans-serif;
+    width: 230px;
+}
+
+.row {
+    padding-left: $modal-padding;
+    padding-right: $modal-padding;
+}
+
+.save-btn,
+.new-list-btn {
+    margin: $modal-padding;
+}
+
+.new-list-btn {
+    align-items: center;
+    color: $color-silver;
+    display: flex;
+    font-size: 18px;
+    white-space: pre;
+}
+
+.plus-icon {
+    color: $color-charcoal;
+    font-size: 13px;
+}
+
+.save-btn {
+    margin-bottom: 18px;
+    width: calc(100% - #{$modal-spacing});
+}
+
+.top-bar {
+    align-items: center;
+    background-color: #eff0f0;
+    border-bottom: 1px solid $legacy-color-gray;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: $modal-padding;
+    padding-right: $modal-padding - 3px;
+    padding-top: $modal-padding;
+}
+
+.top-bar-label {
+    font-weight: 200;
+    height: 16px;
+    line-height: 16px;
+    margin: 0;
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-row {
+    border-bottom: 1px solid $legacy-color-gray;
+}
+
+.list-row,
+.list-row-no-border {
+    font-size: 18px;
+    padding: $modal-padding $modal-padding + 6px $modal-padding $modal-padding;
+
+    &:first-child {
+        padding-top: $modal-spacing;
+    }
+}
+
+.new-list-label {
+    color: $color-silver;
+}
+
+.list-label {
+    color: $label-color;
+}
+
+.list-label,
+.new-list-label {
+    display: flex;
+    justify-content: space-between;
+    line-height: 27px;
+}
+
+.checkbox {
+    color: $label-color;
+}
+
+.text-box {
+    box-sizing: border-box;
+    height: 81px;
+    width: 100%;
+}
+
+.text-input {
+    width: 100%;
+
+    &.error {
+        border-color: $legacy-color-red-light;
+        margin-bottom: 0;
+    }
+}
+
+.text-input,
+.text-box {
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.label {
+    color: $label-color;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.dup-folder-error {
+    color: $legacy-color-red-light;
+    display: list-item;
+    font-size: 14px;
+    line-height: 21px;
+    list-style-position: inside;
+    list-style-type: disc;
+}
+
+.final-notification-close-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $modal-padding;
+}
+
+.final-notification {
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+    margin-bottom: $modal-spacing;
+}

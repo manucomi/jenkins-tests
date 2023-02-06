@@ -1,0 +1,54 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+import Anchor from 'Components/Anchor/Anchor';
+import '../../../scss/fonts/gt-america/gt-america.scss';
+
+# Playground
+
+Change the controls as you wish, to see how the component behaves.
+
+<Meta
+    title="Components/Anchor"
+    component={Anchor}
+    argTypes={{
+        className: {
+            table: { disable: true },
+        },
+        onClick: {
+            table: { disable: true },
+        },
+        children: { table: { disable: true } },
+    }}
+/>
+
+export function Template(args) {
+    /* eslint-disable no-unused-vars */
+    const { href, children, label, newTab, onClick, tabIndex, ref } = args;
+    return (
+        <Anchor
+            href={href}
+            label={label}
+            newTab={newTab}
+            onClick={onClick}
+            tabIndex={tabIndex}
+        >
+            {children}
+        </Anchor>
+    );
+}
+
+<Canvas>
+    <Story
+        name="Playground"
+        args={{
+            children: 'Click Link!',
+            href: 'https://hbr.org',
+            label: 'Go to Harvard Bussiness Review',
+            newTab: true,
+            onClick: action('clicked link'),
+            tabIndex: 0,
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>
