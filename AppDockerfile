@@ -1,0 +1,25 @@
+RUN yum upgrade -y
+RUN yum install -y python37 make gcc curl gcc-c++
+# let's get node
+RUN curl -sL https://rpm.nodesource.com/setup_16.x | bash -
+RUN yum install -y nodejs
+
+WORKDIR /mfe-home
+
+COPY package*.json ./
+
+ARG NPM_TOKEN
+COPY .npmrc .npmrc
+RUN npm ci --loglevel verbose
+COPY . .
+
+ARG COMMIT_HASH
+RUN sed -e s/__COMMIT_HASH__/$COMMIT_HASH/g -i pages/api/healthcheck/index.js
+
+ARG NODE_ENV
+ENV NODE_ENV ${NODE_ENV}
+RUN npm run build
+
+EXPOSE 3000
+
+CMD [ "npm", "start" ]

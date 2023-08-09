@@ -3,7 +3,6 @@ pipeline {
     dockerfile true
   }
    environment {
-        NEXUS_CREDS = credentials("jenkins-nexus")
         commitID = gitCommitID()
         shortID = gitShortID()
 
@@ -12,11 +11,7 @@ pipeline {
         version = ""
         appIdentifier = "mfe-home"
         fullArtifactName = ""
-        GH_HOST = 'git.harvardbusiness.org'
-        CLOUDFORMATION_REPO = "https://${GH_HOST}/itops/aws.git"
-        CF_SCRIPT = "cloud_formation/scripts/add_beanstalk_version.py"
-        CF_TEMPLATE = "hbrg_prod/hbrg_prod.frontend_versions.template"
-        GITHUB_TOKEN = credentials("git-hbrjenkins-itops")
+
     }
   stages {
         stage("Prepare") {
@@ -52,21 +47,12 @@ pipeline {
             }
         }
 
-        stage('NPMRC: Config') {
-            steps {
-                script {
-                    sh "echo '\n//nexus.hbsp.harvard.edu:8081/content/groups/npm-all/:_auth=\${NPM_TOKEN}' >> .npmrc"
-                }
-            }
-        }
-
         stage("Install Dependencies") {
             steps {
-                script {
-                    withEnv(["NPM_TOKEN=${generateNPMToken()}"]) {
+                script {               
                         sh "node -v"
                         sh "npm ci"
-                    }
+                   }
                 }
             }
         }
@@ -152,6 +138,7 @@ pipeline {
                 script {
                     version = calculateVersion()
                     fullArtifactName = "${appIdentifier}_${env.BRANCH_NAME}-${env.BUILD_NUMBER}-${version}.${shortID}.zip"
+                    sh ""
                 }
             }
         }
@@ -181,21 +168,6 @@ def calculateVersion() {
     return newVersion.trim()
 }
 
-def populateBuildUploadDocker() {
-    echo "Building Docker image workspace"
-    sh "cp Dockerrun.aws.skel.json Dockerrun.aws.json"
-    sh "sed -e s/__VERSION__/${version}-${shortID}/g -i.bak Dockerrun.aws.json"
-
-    echo "Building Docker image"
-    buildDocker("${BU}", "${appIdentifier}")
-    tagPushDocker("${BU}", "${appIdentifier}", "${version}")
-    echo "Building docker zip"
-    zip archive: true,
-        dir: "",
-        glob: "Dockerrun.aws.json,.ebextensions/**",
-        zipFile: "build/libs/${fullArtifactName}"
-}
-
 def buildDocker(String BU, String appName) {
     def nodeEnv = "production"
     if (env.environmentName == "QA") {
@@ -204,7 +176,7 @@ def buildDocker(String BU, String appName) {
     sh "sudo docker build -t ${BU}/${appName}:${version} \
      --build-arg COMMIT_HASH=${shortID} \
      --build-arg NODE_ENV=${nodeEnv} \
-     --build-arg NPM_TOKEN=${generateNPMToken()} ."
+     --build-arg NPM_TOKEN=${generateNPMToken()} -f AppDockerfile"
 }
 
 def gitCommitID() {
