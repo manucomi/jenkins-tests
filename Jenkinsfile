@@ -2,17 +2,15 @@ pipeline {
   agent { 
     dockerfile true
   }
-   environment {
-        commitID = gitCommitID()
-        shortID = gitShortID()
-
-        BU = "hbrg"
-        environmentName = "${isQABuild() ? 'QA' : 'prod'}"
-        version = ""
-        appIdentifier = "mfe-home"
-        fullArtifactName = ""
-
-    }
+  environment {
+    commitID = gitCommitID()
+    shortID = gitShortID()
+    BU = "hbrg"
+    environmentName = "${isQABuild() ? 'QA' : 'prod'}"
+    version = ""
+    appIdentifier = "mfe-home"
+    fullArtifactName = ""
+  }
   stages {
         stage("Prepare") {
             steps {
@@ -49,10 +47,8 @@ pipeline {
 
         stage("Install Dependencies") {
             steps {
-                script {               
-                        sh "node -v"
-                        sh "npm ci"
-                   }
+                  sh "node -v"
+                  sh "npm ci"
                 }
             }
         }
@@ -138,12 +134,10 @@ pipeline {
                 script {
                     version = calculateVersion()
                     fullArtifactName = "${appIdentifier}_${env.BRANCH_NAME}-${env.BUILD_NUMBER}-${version}.${shortID}.zip"
-                    sh ""
+                    echo "fullArtifactName: ${fullArtifactName}"
                 }
             }
         }
-
-        
     }
 }
 
