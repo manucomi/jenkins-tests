@@ -2,6 +2,7 @@ pipeline {
   agent { 
     dockerfile true
   }
+
   environment {
     commitID = gitCommitID()
     shortID = gitShortID()
@@ -11,6 +12,7 @@ pipeline {
     appIdentifier = "mfe-home"
     fullArtifactName = ""
   }
+
   stages {
         stage("Prepare") {
             steps {
@@ -49,7 +51,6 @@ pipeline {
             steps {
                   sh "node -v"
                   sh "npm ci"
-                }
             }
         }
 
