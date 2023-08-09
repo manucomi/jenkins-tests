@@ -1,6 +1,6 @@
 pipeline {
   agent { 
-    docker { dockerfile true }
+    dockerfile true
   }
    environment {
         NEXUS_CREDS = credentials("jenkins-nexus")
