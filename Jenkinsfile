@@ -1,6 +1,6 @@
 pipeline {
   agent { 
-    docker { image 'node:18.16.0-alpine' }
+    docker { dockerfile true }
   }
    environment {
         NEXUS_CREDS = credentials("jenkins-nexus")
