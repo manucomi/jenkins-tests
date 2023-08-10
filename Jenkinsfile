@@ -199,3 +199,7 @@ def isMainBuild() {
 def isProdBuild() {
     return env.BRANCH_NAME == "production"
 }
+
+def isHotFixBuild() {
+    return env.BRANCH_NAME.startsWith("hotfix-")
+}
