@@ -1,0 +1,111 @@
+@import "scss/variables/grid-layout";
+@import "scss/variables/media-queries";
+@import "scss/mixins/media-queries";
+@import "scss/mixins/grid-layout";
+
+.container {
+    @include standard-grid();
+    grid-template-areas:
+        "#{$header-area}"
+        "#{$hero-area}"
+        "#{$top-utils-area}"
+        "#{$summary-area}"
+        "#{$content-area}"
+        "#{$right-area}"
+        "#{$author-area}"
+        "#{$bottom-utils-area}"
+        "#{$bottom-related-topics-area}";
+
+    @include screen-min-width($large-standard) {
+        grid-template-areas:
+            "#{$header-area} ."
+            "#{$hero-area} #{$right-area}"
+            "#{$top-utils-area} #{$right-area}"
+            "#{$summary-area} #{$right-area}"
+            "#{$content-area} #{$right-area}"
+            "#{$author-area} ."
+            "#{$bottom-utils-area} .";
+        max-width: $standard-max-width;
+    }
+
+    @include screen-min-width($x-large-standard) {
+        grid-template-areas:
+            ". #{$header-area} ."
+            ". #{$hero-area} #{$right-area}"
+            ". #{$summary-area} #{$right-area}"
+            "#{$left-area} #{$content-area} #{$right-area}"
+            ". #{$author-area} ."
+            ". #{$bottom-utils-area} .";
+    }
+}
+
+.article-header {
+    grid-area: $header-area;
+}
+
+.top-utils {
+    display: none;
+    grid-area: $top-utils-area;
+
+    @include screen-min-width(#{$medium-standard}) {
+        display: block;
+    }
+}
+
+.left-rail {
+    grid-area: $left-area;
+}
+
+.right-rail {
+    grid-area: $right-area;
+    padding-left: $right-rail-margin-standard;
+}
+
+.content {
+    grid-area: $content-area;
+    // While we don't have content styles to hide content that overflows the container.
+    overflow: hidden;
+}
+
+.hero-image {
+    grid-area: $hero-area;
+    margin-left: -20px;
+    margin-right: -20px;
+
+    @include screen-min-width(#{$medium-standard}) {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    @include screen-min-width(#{$large-standard}) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.summary {
+    grid-area: $summary-area;
+}
+
+.author {
+    grid-area: $author-area;
+}
+
+.bottom-utils {
+    grid-area: $bottom-utils-area;
+}
+
+.bottom-series-nav {
+    grid-area: $bottom-series-nav-area;
+    margin: 0 auto;
+}
+
+.bottom-related-topics {
+    display: block;
+    grid-area: $bottom-related-topics-area;
+    margin: 0 auto;
+
+    @include screen-min-width($large-standard) {
+        display: none;
+    }
+}

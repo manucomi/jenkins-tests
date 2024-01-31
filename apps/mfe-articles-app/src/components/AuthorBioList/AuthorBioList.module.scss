@@ -1,0 +1,11 @@
+@import "../../scss/variables/media-queries";
+@import "../../scss/mixins/media-queries";
+
+.container {
+    margin-bottom: 32px;
+    padding-top: 12px;
+
+    @include screen-min-width($medium-standard) {
+        padding-left: 24px;
+    }
+}

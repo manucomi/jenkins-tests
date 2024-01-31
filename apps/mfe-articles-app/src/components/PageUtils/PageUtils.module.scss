@@ -1,0 +1,116 @@
+@import "../../scss/variables/colors";
+@import "../../scss/variables/fonts";
+@import "../../scss/variables/media-queries";
+@import "../../scss/mixins/media-queries";
+
+@mixin common-utility-list() {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.container-top {
+    display: none;
+
+    @include screen-min-width($medium-standard) {
+        border-bottom: 1px solid $legacy-color-border-gray;
+        display: block;
+
+        @include common-utility-list();
+    }
+
+    @include screen-min-width($x-large-standard) {
+        display: none;
+    }
+}
+
+.container-left {
+    display: none;
+
+    &:not(.premium) {
+        @include screen-min-width($x-large-standard) {
+            border-right: 1px solid $legacy-color-border-gray;
+            display: block;
+            flex-direction: column;
+            width: 110px;
+
+            @include common-utility-list();
+        }
+    }
+
+    &.premium {
+        @include screen-min-width($medium-plus) {
+            border-right: 1px solid $legacy-color-border-gray;
+            display: block;
+            flex-direction: column;
+            width: 105px;
+
+            @include common-utility-list();
+        }
+    }
+}
+
+.container-bottom {
+    border-top: 1px solid $legacy-color-border-gray;
+
+    @include common-utility-list();
+}
+
+.list-item {
+    list-style-type: none;
+    margin: 16px 0;
+    text-align: center;
+}
+
+.list-item.vertical {
+    margin-bottom: 20px;
+    margin-top: 0;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.hidden-horizontal-utility {
+    display: none;
+    @include screen-min-width($medium-standard) {
+        display: block;
+    }
+
+    &.premium {
+        display: none;
+        @include screen-min-width($medium-plus) {
+            display: block;
+        }
+    }
+}
+
+.utility-name {
+    display: none;
+    @include screen-min-width($medium-standard) {
+        display: block;
+        margin-top: 8px;
+    }
+
+    &.premium {
+        display: none;
+        @include screen-min-width($medium-plus) {
+            display: block;
+            margin-top: 8px;
+        }
+    }
+}
+
+.item-button {
+    background-color: $color-white;
+    border-style: none;
+    font-family: $font-stack-sans-serif;
+    font-size: 12px;
+    font-weight: 200;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.75;
+    }
+}

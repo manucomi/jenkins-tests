@@ -1,0 +1,90 @@
+@import "scss/variables/colors";
+@import "scss/variables/media-queries";
+@import "scss/mixins/media-queries";
+
+.headline-container {
+    max-width: 525px;
+    padding-bottom: 6.4px;
+
+    @include screen-min-width(#{$medium-plus}) {
+        padding-bottom: 8px;
+    }
+
+    &.standard {
+        padding-bottom: 6.4px;
+
+        @include screen-min-width(#{$medium-standard}) {
+            max-width: 560px;
+            width: 100%;
+        }
+    }
+
+    &.big-idea {
+        margin-bottom: 9px;
+
+        @include screen-min-width(#{$medium-plus}) {
+            padding-top: 32px;
+        }
+    }
+
+    &.big-idea,
+    &.spotlight {
+        margin: 0 auto;
+
+        @include screen-min-width(#{$x-large-plus}) {
+            max-width: 610px;
+            width: 100%;
+        }
+    }
+}
+
+.title {
+    color: $color-charcoal;
+    font-family: "GT America";
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: -0.1664px;
+    line-height: 1;
+    margin-bottom: 0;
+    max-width: 610px;
+
+    &.standard {
+        width: 75%;
+
+        @include screen-min-width(#{$medium-standard}) {
+            font-size: 44px;
+            width: 100%;
+        }
+    }
+
+    &.big-idea {
+        font-family: "Tiempos Headline";
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: -0.25px;
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+
+        @include screen-min-width(#{$medium-standard}) {
+            font-size: 40px;
+            letter-spacing: -0.01px;
+            line-height: 1.15;
+        }
+    }
+
+    @include screen-min-width(#{$medium-plus}) {
+        font-size: 44px;
+    }
+
+    &.spotlight {
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+
+        @include screen-min-width(#{$x-large-plus}) {
+            max-width: 560px;
+            width: 100%;
+        }
+    }
+}

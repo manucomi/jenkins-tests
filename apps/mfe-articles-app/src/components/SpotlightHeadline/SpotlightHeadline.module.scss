@@ -1,0 +1,36 @@
+@import "../../scss/variables/media-queries";
+@import "../../scss/mixins/media-queries";
+
+.content-container {
+    display: none;
+
+    @include screen-min-width($large-plus) {
+        display: none;
+        font-family: "Lava Std";
+        font-size: 16px;
+        letter-spacing: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &.visible {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
+
+.headline-title {
+    font-family: "Lava Std";
+}
+
+.headline-separator {
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.headline-series {
+    color: #fe5502;
+    font-weight: 600;
+    letter-spacing: normal;
+}

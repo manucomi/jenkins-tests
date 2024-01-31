@@ -1,0 +1,29 @@
+@import "scss/variables/media-queries";
+@import "scss/mixins/media-queries";
+
+.wrapper {
+    margin-top: 1px;
+    padding: 0 20px;
+
+    @include screen-min-width($medium-standard) {
+        margin-top: 38px;
+    }
+
+    p {
+        font-family: "Tiempos Text";
+        font-size: 17px;
+        font-weight: 400;
+        letter-spacing: -0.006px;
+        line-height: 28px;
+        margin-bottom: 32px;
+    }
+
+    @include screen-min-width($medium-standard) {
+        padding: 0;
+
+        p {
+            font-size: 18px;
+            line-height: 31px;
+        }
+    }
+}

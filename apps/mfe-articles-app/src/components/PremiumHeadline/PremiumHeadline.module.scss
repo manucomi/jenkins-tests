@@ -1,0 +1,47 @@
+@import "../../scss/variables/media-queries";
+@import "../../scss/mixins/media-queries";
+@import "../../scss/variables/colors";
+
+.content-container {
+    display: none;
+
+    @include screen-min-width($large-plus) {
+        display: none;
+
+        &.visible {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
+
+.headline-topic {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.headline-separator {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.headline-topic-anchor {
+    color: $color-pewter;
+}
+
+.headline-separator {
+    color: #a0a0a0;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.headline-title {
+    color: $color-charcoal;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.35px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

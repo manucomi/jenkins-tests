@@ -1,0 +1,16 @@
+// STANDARD ARTICLE
+$medium-standard: 768px;
+$large-standard: 988px;
+$x-large-standard: 1156px;
+
+// PREMIUM ARTICLE
+$medium-plus: 818px;
+$large-plus: 995px;
+$x-large-plus: 1025px;
+$xx-large-plus: 1351px;
+
+$medium-up: "only screen and (min-width: #{$medium-standard}), print";
+$large-up: "only screen and (min-width:#{$large-standard})";
+$x-large-up: "only screen and (min-width:#{$x-large-standard})";
+
+$x-large-plus-up: "only screen and (min-width:#{$x-large-plus})";

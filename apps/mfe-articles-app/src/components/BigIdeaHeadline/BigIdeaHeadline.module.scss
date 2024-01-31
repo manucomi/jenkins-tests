@@ -1,0 +1,45 @@
+@import "../../scss/variables/media-queries";
+@import "../../scss/mixins/media-queries";
+
+.headline-container-header {
+    display: none;
+    font-family: "Lava Std";
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include screen-min-width($large-plus) {
+        display: block;
+    }
+}
+
+.headline-container {
+    display: block;
+    font-family: "Lava Std";
+    font-size: 14px;
+    letter-spacing: 0;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+
+    @include screen-min-width($medium-plus) {
+        display: none;
+    }
+}
+
+.headline-title-anchor {
+    cursor: pointer;
+    font-family: "Lava Std";
+}
+
+.headline-separator {
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.headline-series {
+    color: #fe5502;
+    letter-spacing: -0.75px;
+}

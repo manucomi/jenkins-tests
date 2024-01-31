@@ -1,0 +1,12 @@
+{
+  "name": "mfe-articles-shared",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint-config-mfe-articles": "*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,803 @@
+@import "../variables/media-queries";
+@import "../variables/colors";
+
+///*------------------------------------*\
+//
+// This file should contain useful classes
+// for structual changes
+// such as margin and paddings
+// also see typography and global helpers
+//
+//\*------------------------------------*/
+
+///*------------------------------------*\
+//    Spacing helpers
+//*------------------------------------*\
+//	 Taken From: Kianosh Pourian "Sass in Depth" book
+//	 * Spacing classes
+//	 * Should be used to modify the default
+//	 * spacing between objects (not between nodes of the same
+//	 * object)
+//	 * Please use judiciously. You want to be
+//	 * using defaults most of the time, these are
+//	 * exceptions!
+//	 * <type><location><size>
+//	 */
+//	/* spacing helpers
+//	p,m = padding,margin
+//	a,t,r,b,l,h,v = all,top,right,bottom,left,
+//	horizontal,vertical
+//	s,m,l,n = small(6px),medium(12px),large(24px),none(0px)
+
+$space-normal: 16px;
+$space-very-small: 3px;
+$space-small: 6;
+$space-medium: 12px;
+$space-large: 24px;
+$space-xlarge: $space-large * 2;
+$space-xxlarge: $space-large * 3;
+$space-xxxlarge: $space-large * 4;
+
+// This is the starting point of all the
+// the z-indexes and all other z-indexes will be
+// above or below this point
+$starting-z-index: 1000;
+
+// Creating the highest peak of the z-index
+// allowing for 10 layers for the z-index
+$highest-z-index: $starting-z-index * 10;
+
+$column-gutter: 20px;
+
+@each $margin-padding, $mp in (margin, m), (padding, p) {
+    @each $side, $s, $hv in (top, t, v), (bottom, b, v), (left, l, h),
+        (right, r, h)
+    {
+        @each $value, $v in (0, n), ($space-very-small, vs), ($space-small, s),
+            ($space-medium, m), ($space-large, l), ($space-xlarge, xl)
+        {
+            .#{$mp}#{$s}#{$v},
+            .#{$mp}#{$hv}#{$v},
+            .#{$mp}a#{$v} {
+                #{$margin-padding}-#{$side}: #{$value};
+            }
+        }
+    }
+}
+
+.tap-target-height {
+    min-height: 44px;
+}
+
+.mra,
+.mha {
+    margin-right: auto;
+}
+
+.mla,
+.mha {
+    margin-left: auto;
+}
+
+// if you want spaces before and after a thing
+.cushion {
+    margin-bottom: $space-large * 1.5;
+    margin-top: $space-large * 1.5;
+
+    @media #{$x-large-plus-up} {
+        margin-bottom: $space-large * 2.5;
+        margin-top: $space-large * 2.5;
+    }
+}
+
+@each $side, $s in (top, t), (bottom, b) {
+    @each $n in 2, 3, 4, 5, 6 {
+        .m#{$s}-large#{$n},
+        .mv-large#{$n} {
+            margin-#{$side}: $space-large;
+
+            @media #{$x-large-plus-up} {
+                margin-#{$side}: $space-large * $n;
+            }
+        }
+    }
+}
+
+// far away from things around it
+.island {
+    margin: $space-large * 1.5;
+}
+
+.far-island {
+    margin: $space-large * 3;
+}
+
+// use .pan .man for no padidng and no margin
+
+// horizontal align anything
+.is-centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// allow an inline lists to be centered within div by using display: table http://css-tricks.com/centering-list-items-horizontally-slightly-trickier-than-you-might-think/
+.is-centered-list {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Nudge the element up. Negative margin is not evil if you add it back.
+// Be aware that this will have strange effect when dom sibling right before does not have margin bottom.
+// In that case give the item a mbl (= margin bottom large)
+.nudge-up {
+    margin-bottom: 21px;
+    margin-top: -21px;
+    position: relative;
+    top: -2px;
+}
+
+//for non-responsive ads. Wrap the div with this.
+.ad-container {
+    box-sizing: content-box;
+    margin: 0 auto;
+    max-width: 320px;
+    min-height: 50px;
+    overflow: hidden;
+    padding-bottom: 8px;
+    padding-top: 10px;
+
+    @media print {
+        display: none;
+    }
+
+    @media #{$medium-up} {
+        max-width: 970px;
+    }
+
+    &.ad-728 {
+        max-width: 728px;
+    }
+
+    &.ad-300 {
+        max-width: 300px;
+    }
+
+    &.ad-230 {
+        max-width: 230px;
+    }
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.ad-container-column {
+    background-color: $color-white;
+    box-shadow: inset 0 -3px 10px rgba(0, 0, 0, 0.07);
+
+    @media #{$medium-up} {
+        z-index: ($starting-z-index * 9);
+    }
+}
+
+//media width aware floats.
+.medium-left {
+    @media #{$medium-up} {
+        float: left;
+    }
+}
+
+.medium-right {
+    @media #{$medium-up} {
+        float: right;
+    }
+}
+
+.large-left {
+    @media #{$x-large-plus-up} {
+        float: left;
+    }
+}
+
+.large-right {
+    @media #{$x-large-plus-up} {
+        float: right;
+    }
+}
+
+///*------------------------------------*\
+//   Zurb Foundation related helpers
+//\*------------------------------------*/
+// helper that removes foundation gutter
+// since we can't use negative padding, we are using margin,
+// but beware! can't combine it with an element with width.
+// best to create a stand-alone div for this purpose.
+.remove-gutter {
+    margin-left: ($column-gutter/2) * -1;
+    margin-right: ($column-gutter/2) * -1;
+
+    .row {
+        // this removes `.row .row` rule
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    @media print {
+        display: none;
+    }
+}
+
+.remove-gutter-right {
+    margin-right: ($column-gutter/2) * -1;
+}
+
+.remove-gutter-left {
+    margin-left: ($column-gutter/2) * -1;
+}
+
+.small-remove-gutter {
+    margin-left: ($column-gutter / 2) * -1;
+    margin-right: ($column-gutter / 2) * -1;
+    @media #{$medium-up} {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+// Helper that removes space below ".row"
+//if there is another floating element in the same content well
+.no-clear-after,
+.row-layout-fix {
+    &::after {
+        clear: none;
+    }
+}
+
+///*------------------------------------*\
+//   Text column related helpers
+//\*------------------------------------*/
+
+// multi-column layout: 2
+.two-column-text {
+    @media #{$medium-up} {
+        column-count: 2;
+        column-gap: $space-large;
+    }
+}
+
+// multi-column layout: 3
+.three-column-text {
+    @media #{$medium-up} {
+        column-count: 2;
+        column-gap: $space-large;
+    }
+
+    @media #{$x-large-plus-up}, print {
+        column-count: 3;
+        column-gap: $space-large;
+    }
+}
+
+// multi-column layout: 4
+.four-column-text {
+    font-weight: 200;
+
+    @media #{$medium-up} {
+        column-count: 3;
+        column-gap: $space-large;
+    }
+
+    @media #{$x-large-plus-up} {
+        column-count: 4;
+        column-gap: $space-large;
+    }
+}
+
+// collapsed state for multi-column: 1
+.column-collapse {
+    column-count: 1;
+}
+
+///*------------------------------------*\
+//   Z-index related helpers
+//   See: /source/scss/_hbr-config.scss
+//\*------------------------------------*/
+
+.zindex-highest {
+    z-index: $highest-z-index + 1;
+}
+
+.zindex-lowest {
+    z-index: $starting-z-index - 1;
+}
+
+///*------------------------------------*\
+//   Width related helpers
+//\*------------------------------------*/
+
+// show content in limited width for small
+.limit-width-for-small {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    @media #{$medium-up} {
+        margin-left: 0;
+        margin-top: 0;
+        width: auto;
+    }
+}
+
+.min-width-150 {
+    min-width: 150px;
+}
+
+.min-width-130 {
+    min-width: 130px;
+}
+
+.min-width-100 {
+    min-width: 100px;
+}
+
+.max-width-200 {
+    max-width: 200px;
+}
+
+.max-width-700 {
+    max-width: 700px;
+}
+
+.max-width-320 {
+    max-width: 320px;
+}
+
+.width-search-input {
+    width: 250px; /* per design's requirements 65% of 250px */
+}
+
+.width-100 {
+    width: 100px;
+}
+
+.width-150 {
+    width: 150px;
+}
+
+.width-200 {
+    width: 200px;
+}
+
+.width-250 {
+    width: 200px;
+}
+
+.width-300 {
+    width: 300px;
+}
+
+.width-350 {
+    width: 300px;
+
+    @media #{$medium-up} {
+        width: 350px;
+    }
+}
+
+.width-400 {
+    width: 300px;
+
+    @media #{$medium-up} {
+        width: 400px;
+    }
+}
+
+.width-550 {
+    width: 300px;
+
+    @media #{$medium-up} {
+        width: 550px;
+    }
+}
+
+.width-100pct {
+    width: 100%;
+}
+
+.width-90pct {
+    width: 90%;
+}
+
+.width-80pct {
+    width: 80%;
+}
+
+.width-66pct {
+    width: 66%;
+}
+
+.width-66pct-responsive {
+    width: 66%;
+
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 36%;
+    }
+}
+
+.height-100pct {
+    height: 100%;
+}
+
+.height-250 {
+    height: 250px;
+}
+
+.size-64x64 {
+    height: 64px;
+    width: 64px;
+}
+
+.size-48x48 {
+    height: 48px;
+    width: 48px;
+}
+
+.size-32x32 {
+    height: 32px;
+    width: 32px;
+}
+
+.size-24x24 {
+    height: 24px;
+    width: 24px;
+}
+
+///*------------------------------------*\
+//    positioning helpers
+//\*------------------------------------*/
+// Absolute positioning helpers.
+// Designed to be used for homepage posters
+// None of the absolutes apply to small (only medium-up).
+
+.container {
+    overflow: visible;
+    position: relative;
+    width: auto;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute-bottom {
+    @media #{$medium-up} {
+        bottom: 0;
+        position: absolute;
+    }
+}
+
+.absolute-bottom--medium-only {
+    @media #{$medium-up} {
+        bottom: 0;
+        position: absolute;
+    }
+}
+
+.vertical-align-top {
+    vertical-align: top;
+}
+
+.vertical-align-bottom {
+    vertical-align: bottom;
+}
+
+.vertical-align-middle {
+    vertical-align: middle;
+}
+
+// used for get-more and hmm poster
+.poster-logo-for-small {
+    position: absolute;
+    top: -120px;
+    width: 200px;
+
+    @media #{$medium-up} {
+        position: static;
+        width: auto;
+    }
+}
+
+.order-1 {
+    order: 1;
+}
+
+.order-2 {
+    order: 2;
+}
+
+.order-3 {
+    order: 3;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.justify-start {
+    justify-content: flex-start;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-items-end {
+    align-items: flex-end;
+}
+
+.flex-row {
+    display: flex;
+}
+
+.flex-direction--row {
+    flex-direction: row;
+    width: 100%;
+}
+
+@media #{$medium-up} {
+    .flex-row-medium {
+        display: flex;
+    }
+}
+
+@media #{$x-large-plus-up} {
+    .flex-row-large {
+        display: flex;
+    }
+}
+
+@mixin flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-col {
+    @include flex-col;
+}
+
+@media #{$medium-up} {
+    .flex-col-medium {
+        @include flex-col;
+    }
+}
+
+@media #{$x-large-plus-up} {
+    .flex-col-large {
+        @include flex-col;
+    }
+}
+
+.flex-row-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-col-wrap {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+///*------------------------------------*\
+//    drop shadows
+//\*------------------------------------*/
+
+.light-box-shadow {
+    box-shadow: 0 0 $space-medium 0 rgba(50, 50, 50, 0.2);
+}
+
+.faint-box-shadow {
+    box-shadow: 0 0 $space-medium 0 rgba(50, 50, 50, 0.1);
+}
+
+.faint-drop-shadow {
+    box-shadow: 2px 2px 2px #fff5ee;
+}
+
+.strong-drop-shadow {
+    box-shadow: 3px 3px 3px $legacy-color-gray-light;
+}
+
+///*------------------------------------*\
+//    Clear helpers
+//\*------------------------------------*/
+
+.clear-right {
+    clear: right;
+}
+
+.clear-left {
+    clear: left;
+}
+
+.clear-both {
+    clear: both;
+}
+
+.clear-none {
+    clear: none;
+}
+
+///*------------------------------------*\
+//    IE8 message
+//\*------------------------------------*/
+.ie-8-message {
+    display: none;
+
+    .ie8 & {
+        display: block;
+    }
+}
+
+///*------------------------------------*\
+//    Alignments -- WordPress generated
+//\*------------------------------------*/
+.alignright,
+.align-right {
+    margin-bottom: $space-normal;
+
+    @media #{$medium-up} {
+        float: right;
+        margin-left: $space-normal + $space-large;
+    }
+}
+
+.alignleft,
+.align-left {
+    margin-bottom: $space-normal;
+
+    @media #{$medium-up} {
+        float: left;
+        margin-right: $space-normal + $space-large;
+    }
+}
+
+.aligncenter,
+.align-center {
+    display: block;
+    margin-bottom: $space-normal;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alignnone,
+.align-none {
+    float: none;
+    margin-bottom: $space-normal;
+}
+
+.top-8pct {
+    top: -8%;
+}
+
+.top-100pct {
+    top: 100%;
+}
+
+.bottom-100pct {
+    bottom: 100%;
+}
+
+.bottom-0 {
+    bottom: 0;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.rotate-180deg {
+    transform: rotate(180deg);
+}
+
+%img-responsive-16by9 {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+}
+
+.img-16by9 {
+    @extend %img-responsive-16by9;
+
+    width: 100%;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-0-medium-up {
+    @media #{$medium-up} {
+        opacity: 0;
+    }
+}
+
+.opacity-0-small-only {
+    opacity: 0;
+
+    @media #{$medium-up} {
+        opacity: 1;
+    }
+}
+
+///*------------------------------------*\
+//    Width helpers
+//\*------------------------------------*/
+
+.width-auto {
+    width: auto;
+}
+
+///*------------------------------------*\
+//    Figure helpers
+//\*------------------------------------*/
+
+.exhibit-full-width {
+    border-bottom: 1px $color-silver solid;
+    border-top: 1px $color-silver solid;
+    font-size: 12px;
+    margin-bottom: 24px;
+    margin-top: 24px;
+    padding-bottom: 6px;
+    padding-top: 24px;
+
+    > img {
+        width: 100%;
+    }
+}
+
+.exhibit-half-width {
+    border-bottom: 1px $color-silver solid;
+    border-top: 1px $color-silver solid;
+    font-size: 12px;
+    margin-bottom: 24px;
+    margin-top: 1.5rem;
+    padding-bottom: 0.375rem;
+    padding-top: 1.5rem;
+
+    > img {
+        width: 50%;
+    }
+}

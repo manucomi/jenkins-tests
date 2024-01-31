@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "layouts/*": ["src/layouts/*"],
+            "components/*": ["src/components/*"],
+            "scss/*": ["src/scss/*"],
+            "__mocks__/*": ["src/__mocks__/*"],
+            "stores/*":["src/stores/*"],
+            "helpers/*":["src/helpers/*"]
+        }
+    },
+    "include": ["."]
+}

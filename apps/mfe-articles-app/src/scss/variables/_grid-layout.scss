@@ -1,0 +1,26 @@
+// STANDARD ARTICLE - Page elements responsiveness
+$right-rail-width-standard: 388px;
+$right-rail-margin-standard: 48px;
+$left-rail-width-standard: 172px;
+$standard-max-width: 1250px;
+
+// PREMIUM ARTICLE - Page elements responsiveness
+$rails-width-plus: 104px;
+
+// BOTH STANDARD AND PREMIUM ARTICLES - article text column
+$article-width: 610px;
+$article-width-sm: 525px;
+
+// GRID AREAS
+$header-area: header;
+$hero-area: hero;
+$summary-area: summary;
+$left-area: left;
+$content-area: content;
+$right-area: right;
+$top-series-nav-area: series-nav;
+$bottom-series-nav-area: bottom-series-nav;
+$author-area: author;
+$bottom-utils-area: bottom-utils;
+$top-utils-area: top-utils;
+$bottom-related-topics-area: bottom-related-topics;

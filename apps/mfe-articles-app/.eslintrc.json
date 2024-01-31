@@ -1,0 +1,35 @@
+{
+  "extends": ["mfe-articles"],
+  "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "alias": {
+                "map": [
+                    ["components", "./src/components"],
+                    ["__mocks__", "./src/__mocks__"],
+                    ["scss", "./src/scss"],
+                    ["layouts", "./src/layouts"],
+                    ["stores", "./src/stores"],
+                    ["helpers", "./src/helpers"]
+                ],
+                "extensions": [".js", ".jsx", ".json"]
+            }
+        }
+    },
+    "overrides": [
+        {
+            "files": [
+                "**/*.test.@(js|jsx)",
+                "story-helpers/**",
+                "src/test-helpers/**",
+                "storybook/*",
+                "**/stories/*.jsx"
+            ],
+            "rules": {
+                "import/no-extraneous-dependencies": 0
+            }
+        }
+    ]
+}

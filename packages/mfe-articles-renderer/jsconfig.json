@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "allowSyntheticDefaultImports": false,
+        "baseUrl": "./",
+        "paths": {
+            "Build-Helpers/*": ["Build-Helpers/*"],
+            "Components/*": ["src/components/*"],
+        }
+    },
+    "exclude": ["node_modules", "dist"],
+    "include": ["."]
+}

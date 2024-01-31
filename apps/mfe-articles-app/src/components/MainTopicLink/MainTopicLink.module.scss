@@ -1,0 +1,67 @@
+@import "scss/variables/colors";
+@import "scss/variables/media-queries";
+@import "scss/mixins/media-queries";
+
+.container {
+    display: flex;
+
+    &.standard {
+        padding-bottom: 16px;
+        padding-top: 32px;
+
+        @include screen-min-width($medium-standard) {
+            padding-bottom: 32px;
+            padding-top: 72px;
+        }
+    }
+
+    &.big-idea {
+        display: none;
+        justify-content: center;
+        padding-bottom: 16px;
+        padding-top: 32px;
+        @include screen-min-width($medium-plus) {
+            display: flex;
+            padding-bottom: 16px;
+            padding-top: 52px;
+        }
+    }
+
+    &.spotlight {
+        justify-content: center;
+        padding-bottom: 16px;
+        padding-top: 32px;
+
+        @include screen-min-width($medium-standard) {
+            padding-bottom: 32px;
+            padding-top: 72px;
+        }
+    }
+
+    &.premium {
+        justify-content: center;
+        padding-bottom: 16px;
+        padding-top: 32px;
+
+        @include screen-min-width($medium-standard) {
+            padding-bottom: 32px;
+            padding-top: 72px;
+        }
+    }
+}
+
+.topic {
+    color: #505050;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.128px;
+    text-transform: capitalize;
+
+    &:hover {
+        color: $color-charcoal;
+    }
+
+    @include screen-min-width($medium-standard) {
+        font-size: 16px;
+    }
+}

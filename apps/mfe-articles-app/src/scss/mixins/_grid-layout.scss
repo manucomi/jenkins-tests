@@ -1,0 +1,58 @@
+@import "./media-queries";
+@import "../variables/grid-layout";
+@import "../variables/media-queries";
+
+@mixin standard-grid() {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+    max-width: $article-width-sm;
+
+    @include screen-min-width($medium-standard) {
+        max-width: $article-width;
+    }
+
+    @include screen-min-width($large-standard) {
+        grid-template-columns: minmax(560px, $article-width) minmax(
+                348px,
+                $right-rail-width-standard
+            );
+        margin-left: 40px;
+    }
+
+    @include screen-min-width($x-large-standard) {
+        grid-template-columns:
+            $left-rail-width-standard minmax(560px, $article-width)
+            $right-rail-width-standard;
+        margin-left: auto;
+    }
+}
+
+@mixin plus-grid() {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+    max-width: $article-width-sm;
+
+    @include screen-min-width($medium-plus) {
+        grid-template-columns:
+            minmax($rails-width-plus, 384px) $article-width-sm
+            minmax($rails-width-plus, 384px);
+        max-width: 100%;
+    }
+
+    @include screen-min-width($x-large-plus) {
+        grid-template-columns:
+            minmax($rails-width-plus, 384px) $article-width
+            minmax($rails-width-plus, 384px);
+        max-width: $standard-max-width;
+    }
+
+    @include screen-min-width($xx-large-plus) {
+        grid-template-columns: 384px $article-width minmax(
+                $rails-width-plus,
+                384px
+            );
+        max-width: 1378px;
+    }
+}

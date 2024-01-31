@@ -1,0 +1,48 @@
+@import "../../scss/variables/fonts";
+@import "../../scss/variables/media-queries";
+@import "../../scss/mixins/media-queries";
+
+.img {
+    margin: auto;
+    width: 100%;
+}
+
+.container-caption-credits {
+    font-family: $font-stack-sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.1px;
+    margin: 16px 0;
+
+    &.big-idea {
+        margin-left: 20px;
+
+        @include screen-min-width($medium-standard) {
+            margin-left: 40px;
+        }
+    }
+
+    &.spotlight {
+        margin-left: 20px;
+
+        @include screen-min-width($medium-plus) {
+            margin-left: 0;
+        }
+    }
+
+    &.premium {
+        margin-left: 20px;
+
+        @include screen-min-width($medium-plus) {
+            margin-left: 0;
+        }
+    }
+}
+
+.credits {
+    color: #a0a0a0;
+}
+
+.caption {
+    color: #505050;
+}

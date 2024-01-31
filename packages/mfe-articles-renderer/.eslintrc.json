@@ -1,0 +1,27 @@
+{
+  "extends": ["mfe-articles"],
+  "settings": {
+        "import/resolver": {
+            "alias": {
+                "extensions": [".js", ".jsx"],
+                "map": [
+                    ["Build-Helpers", "./build-helpers"],
+                    ["Components", "./src/components"]
+                ]
+            }
+        }
+    },
+    "overrides": [
+        {
+            "files": [
+                "**/*.test.@(js|jsx)",
+                "story-helpers/**",
+                "src/test-helpers/**",
+                "**/stories/*.jsx"
+            ],
+            "rules": {
+                "import/no-extraneous-dependencies": 0
+            }
+        }
+    ]
+}
