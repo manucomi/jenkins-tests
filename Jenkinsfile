@@ -12,9 +12,7 @@ pipeline {
         dockerfile {
             filename 'Dockerfile.jenkinsAgent'
             dir 'jenkins'
-            additionalBuildArgs  '--build-arg JENKINSUID=`id -u jenkins` --build-arg JENKINSGID=`id -g jenkins` --build-arg DOCKERGID=`stat -c %g /var/run/docker.sock`'
-            args '-v $HOME/.ssh:/home/jenkins/.ssh -v $HOME/.aws:/root/.aws -v /var/run/docker.sock:/var/run/docker.sock -u jenkins:docker'
-            reuseNode true
+           reuseNode true
         }
     }
 
@@ -25,7 +23,6 @@ pipeline {
 
     environment {
         HOME = "."
-        NEXUS_CREDS = credentials("jenkins-nexus")
         commitID = gitCommitID()
         shortID = gitShortID()
 
@@ -34,12 +31,6 @@ pipeline {
         version = ""
         appIdentifier = "mfe-articles"
         fullArtifactName = ""
-        GH_HOST = 'git.harvardbusiness.org'
-        CLOUDFORMATION_REPO = "https://${GH_HOST}/itops/aws.git"
-        CF_SCRIPT = "cloud_formation/scripts/add_beanstalk_version.py"
-        GITHUB_TOKEN = credentials("git-hbrjenkins-itops")
-        MAIN_BRANCH = "main"
-        CHROMATIC_TOKEN = credentials('Chromatic-CLI-mfe-articles')
     }
 
     stages {
@@ -57,40 +48,12 @@ pipeline {
             }
         }
 
-        stage("Choose Release Type") {
-            when {
-                expression {
-                    return isProdBuild()
-                }
-            }
-            steps {
-                script {
-                  timeout(2) {
-                      env.releaseType = input message: "Please select a release type",
-                          parameters: [choice(choices: ["patch", "minor", "major", "none"],
-                              description: "Examples:\n\npatch: v1.0.0 to v1.0.1\nminor: v1.0.0 to v1.1.0\nmajor: v1.0.0 to v2.0.0\nnone: Just deploy. Will not increment the version.",
-                              name: "releaseType")]
-                  }
-                 echo "Release type: ${env.releaseType}"
-                }
-            }
-        }
-
-        stage('NPMRC: Config') {
-            steps {
-                script {
-                    sh "echo '\n//nexus.hbsp.harvard.edu:8081/content/groups/npm-all/:_auth=\${NPM_TOKEN}' >> .npmrc"
-                }
-            }
-        }
-
         stage("Install Dependencies") {
             steps {
                 script {
-                    withEnv(["NPM_TOKEN=${generateNPMToken()}"]) {
                         sh "node -v"
                         sh "npm ci"
-                    }
+                    
                 }
             }
         }
